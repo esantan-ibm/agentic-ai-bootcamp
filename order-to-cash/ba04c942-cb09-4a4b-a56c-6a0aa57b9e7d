@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  
+  data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
+  data-a11y-animated-images="system" data-a11y-link-underlines="true"
+  
+  >
+
+
+
+  <head>
+    <meta charset="utf-8">
+
+  <title>Initiating SAML single sign-on</title>
+  <meta http-equiv="refresh" content="0;url=https://login.w3.ibm.com/saml/sps/saml20ip/saml20/login?RelayState=Pp1BbNO8w3vMudk2sZ9exZ_WO3XnAIwRuFalDVcWQUKreolr6nXc16xDsLjZSM6ms4ZkUbCQHi7gFz97LhnYqXnIc8GmEqxujvgsVsOoL0k&amp;SAMLRequest=fZJRb9owEMff%2Bykiv5M4BgKxCBUtmobUlaiwPexlcpwzWErszOfQ7dvPBKp16tq3k%2FM75%2F%2B78%2BL2V9tEJ3CorSlIGlNyu7xZoGibjq96fzRP8LMH9FHgDPLhQ0F6Z7gVqJEb0QJyL%2Flu9eWBs5jyzllvpW3Iq5aPOwQiOB8CkGizLsiPnIqM5WwCMzbO1VhOKjGtMwVyNq6AMSWlUrnIKc1VJVU2z8U0q0I1p5DPMqDhGsQeNga9ML4gjLLpiM5HbLZPp3ySckq%2Fk%2Bjbi3SIQKJ1cNRG%2BOHk6H2HPEkae9Amfh7Humpjadvk7JJgh0PBqO6uxYU8%2F7cMMvoEBVGiQSBReZ3GnTa1NoePB1FdIOSf9%2FtyVG53exKtXoZzbw32LbgduJOW8PXp4W%2FQg%2FbHvvo3przwZDlskw8jccv%2FdyyS18x1%2FY8h32Zd2kbL39GqaezzvQPhg5t3fVD7ZF0r%2FPtGaZwOJ7oeqQHlvcEOpFYaapJccwWtWp%2F9MHq0%2Fg4CCu%2BtLABbs3Ur5cG9YbKBCdcmb1%2Fv8uYP&amp;SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&amp;Signature=eigXFEDziTGEPG8XCgCeetSPZgG%2FfXkY80dczsyRv3tuYvJpdo%2FL0vdlx46weo9KgeXWt8fh4PW2eEF3D35oeZ0b0DOLbYFt5vNwSxHmGm7Sv8oewksMompT0o7ADMckLKVPFQr1zdRmXiGUDHKfH3GRyddsQKlMedvl371haPZJnNMWW9Qu59sqyURpwwlG%2Bef0NrwzOuYdG2BzA2sSMuagTcVHkbcy7c19A4Sk6KwUOSmaw68r6B3pkFJCvHqfx%2Fj%2F8ApGU353FTnZXR44bOW07CcvzrbVYsDEWPueANjgyfYOXML2xO3NeiAC4pzkiyJcSXgYjESERIHOWPN%2BR6llfd12%2BMRgMo79qfvYmlA%2BYyG2nQKl%2FOEKOqbcoeWGwb5yltn6bbq9WMPT3eK9ZwfBA0IcSzWbtWVjMJf2qYEKgkl5Qw0uQgmEgsvQEX6OS%2BHWqhdoHigeCIkfgCnwk3LjZLQgSgUlPyiW9s0cj8Spd5zMBlAz96dszwsUU8S9r30qYaSHAK8%2B5iZNxJm08ww6Lygn9bDePH73eMJV0ZHyzgcxv%2Fahle9ndNHNACItisqlit3Tla%2FNqTIPFcVCiHZQ1F6hqQWO54m8ut4uyF1GWfUWMY%2F494EZnron1onhpY3dNKnvBDNnGitL%2BfHRvIK6gAf0f2qsVoQNRPFzn74%3D" data-url="https://login.w3.ibm.com/saml/sps/saml20ip/saml20/login?RelayState=Pp1BbNO8w3vMudk2sZ9exZ_WO3XnAIwRuFalDVcWQUKreolr6nXc16xDsLjZSM6ms4ZkUbCQHi7gFz97LhnYqXnIc8GmEqxujvgsVsOoL0k&amp;SAMLRequest=fZJRb9owEMff%2Bykiv5M4BgKxCBUtmobUlaiwPexlcpwzWErszOfQ7dvPBKp16tq3k%2FM75%2F%2B78%2BL2V9tEJ3CorSlIGlNyu7xZoGibjq96fzRP8LMH9FHgDPLhQ0F6Z7gVqJEb0QJyL%2Flu9eWBs5jyzllvpW3Iq5aPOwQiOB8CkGizLsiPnIqM5WwCMzbO1VhOKjGtMwVyNq6AMSWlUrnIKc1VJVU2z8U0q0I1p5DPMqDhGsQeNga9ML4gjLLpiM5HbLZPp3ySckq%2Fk%2Bjbi3SIQKJ1cNRG%2BOHk6H2HPEkae9Amfh7Humpjadvk7JJgh0PBqO6uxYU8%2F7cMMvoEBVGiQSBReZ3GnTa1NoePB1FdIOSf9%2FtyVG53exKtXoZzbw32LbgduJOW8PXp4W%2FQg%2FbHvvo3przwZDlskw8jccv%2FdyyS18x1%2FY8h32Zd2kbL39GqaezzvQPhg5t3fVD7ZF0r%2FPtGaZwOJ7oeqQHlvcEOpFYaapJccwWtWp%2F9MHq0%2Fg4CCu%2BtLABbs3Ur5cG9YbKBCdcmb1%2Fv8uYP&amp;SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&amp;Signature=eigXFEDziTGEPG8XCgCeetSPZgG%2FfXkY80dczsyRv3tuYvJpdo%2FL0vdlx46weo9KgeXWt8fh4PW2eEF3D35oeZ0b0DOLbYFt5vNwSxHmGm7Sv8oewksMompT0o7ADMckLKVPFQr1zdRmXiGUDHKfH3GRyddsQKlMedvl371haPZJnNMWW9Qu59sqyURpwwlG%2Bef0NrwzOuYdG2BzA2sSMuagTcVHkbcy7c19A4Sk6KwUOSmaw68r6B3pkFJCvHqfx%2Fj%2F8ApGU353FTnZXR44bOW07CcvzrbVYsDEWPueANjgyfYOXML2xO3NeiAC4pzkiyJcSXgYjESERIHOWPN%2BR6llfd12%2BMRgMo79qfvYmlA%2BYyG2nQKl%2FOEKOqbcoeWGwb5yltn6bbq9WMPT3eK9ZwfBA0IcSzWbtWVjMJf2qYEKgkl5Qw0uQgmEgsvQEX6OS%2BHWqhdoHigeCIkfgCnwk3LjZLQgSgUlPyiW9s0cj8Spd5zMBlAz96dszwsUU8S9r30qYaSHAK8%2B5iZNxJm08ww6Lygn9bDePH73eMJV0ZHyzgcxv%2Fahle9ndNHNACItisqlit3Tla%2FNqTIPFcVCiHZQ1F6hqQWO54m8ut4uyF1GWfUWMY%2F494EZnron1onhpY3dNKnvBDNnGitL%2BfHRvIK6gAf0f2qsVoQNRPFzn74%3D">
+  <meta name="viewport" content="width=device-width">
+  <link crossorigin="use-credentials" media="all" rel="stylesheet" href="https://assets.github.ibm.com/assets/light-3e154969b9f9.css" /><link crossorigin="use-credentials" media="all" rel="stylesheet" href="https://assets.github.ibm.com/assets/dark-9c5b7a476542.css" /><link data-color-theme="dark_dimmed" crossorigin="use-credentials" media="all" rel="stylesheet" data-href="https://assets.github.ibm.com/assets/dark_dimmed-afda8eb0fb33.css" /><link data-color-theme="dark_high_contrast" crossorigin="use-credentials" media="all" rel="stylesheet" data-href="https://assets.github.ibm.com/assets/dark_high_contrast-2494e44ccdc5.css" /><link data-color-theme="dark_colorblind" crossorigin="use-credentials" media="all" rel="stylesheet" data-href="https://assets.github.ibm.com/assets/dark_colorblind-56fff47acadc.css" /><link data-color-theme="light_colorblind" crossorigin="use-credentials" media="all" rel="stylesheet" data-href="https://assets.github.ibm.com/assets/light_colorblind-71cd4cc132ec.css" /><link data-color-theme="light_high_contrast" crossorigin="use-credentials" media="all" rel="stylesheet" data-href="https://assets.github.ibm.com/assets/light_high_contrast-fd5499848985.css" /><link data-color-theme="light_tritanopia" crossorigin="use-credentials" media="all" rel="stylesheet" data-href="https://assets.github.ibm.com/assets/light_tritanopia-31d17ba3e139.css" /><link data-color-theme="dark_tritanopia" crossorigin="use-credentials" media="all" rel="stylesheet" data-href="https://assets.github.ibm.com/assets/dark_tritanopia-68d6b2c79663.css" />
+  <link crossorigin="use-credentials" media="all" rel="stylesheet" href="https://assets.github.ibm.com/assets/primer-af846850481e.css" />
+  <link crossorigin="use-credentials" media="all" rel="stylesheet" href="https://assets.github.ibm.com/assets/global-8b10f05a77e6.css" />
+
+
+
+  <link rel="mask-icon" href="https://assets.github.ibm.com/assets/pinned-octocat-093da3e6fa40.svg" color="#000000">
+  <link rel="alternate icon" class="js-site-favicon" type="image/png" href="https://assets.github.ibm.com/favicons/favicon-ent.png">
+  <link rel="icon" class="js-site-favicon" type="image/svg+xml" href="https://assets.github.ibm.com/favicons/favicon-ent.svg" data-base-href="https://assets.github.ibm.com/favicons/favicon-ent">
+
+<meta name="theme-color" content="#1e2327">
+<meta name="color-scheme" content="light dark" />
+
+
+  <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials">
+
+  </head>
+
+  <body  style="word-wrap: break-word;">
+    <div data-turbo-body  style="word-wrap: break-word;">
+      
+  
+<div class="container-md px-3">
+  <div data-view-component="true" class="blankslate mt-5">
+    <svg aria-hidden="true" height="24" viewBox="0 0 24 24" version="1.1" width="24" data-view-component="true" class="octicon octicon-shield-lock blankslate-icon">
+    <path d="M11.46 1.137a1.748 1.748 0 0 1 1.08 0l8.25 2.675A1.75 1.75 0 0 1 22 5.476V10.5c0 6.19-3.77 10.705-9.401 12.83a1.704 1.704 0 0 1-1.198 0C5.771 21.204 2 16.69 2 10.5V5.476c0-.76.49-1.43 1.21-1.664Zm.617 1.426a.253.253 0 0 0-.154 0L3.673 5.24a.25.25 0 0 0-.173.237V10.5c0 5.461 3.28 9.483 8.43 11.426a.199.199 0 0 0 .14 0c5.15-1.943 8.43-5.965 8.43-11.426V5.476a.25.25 0 0 0-.173-.237ZM13 12.232V15a1 1 0 0 1-2 0v-2.768a2 2 0 1 1 2 0Z"></path>
+</svg>
+    <h3 data-view-component="true" class="mb-1">You are being redirected to your identity provider in order to authenticate.</h3>
+  
+    <p>
+      If your browser does not redirect you back, please <a id="redirect" aria-label="click here to redirect you back" class="Link--inTextBlock" href="https://login.w3.ibm.com/saml/sps/saml20ip/saml20/login?RelayState=Pp1BbNO8w3vMudk2sZ9exZ_WO3XnAIwRuFalDVcWQUKreolr6nXc16xDsLjZSM6ms4ZkUbCQHi7gFz97LhnYqXnIc8GmEqxujvgsVsOoL0k&amp;SAMLRequest=fZJRb9owEMff%2Bykiv5M4BgKxCBUtmobUlaiwPexlcpwzWErszOfQ7dvPBKp16tq3k%2FM75%2F%2B78%2BL2V9tEJ3CorSlIGlNyu7xZoGibjq96fzRP8LMH9FHgDPLhQ0F6Z7gVqJEb0QJyL%2Flu9eWBs5jyzllvpW3Iq5aPOwQiOB8CkGizLsiPnIqM5WwCMzbO1VhOKjGtMwVyNq6AMSWlUrnIKc1VJVU2z8U0q0I1p5DPMqDhGsQeNga9ML4gjLLpiM5HbLZPp3ySckq%2Fk%2Bjbi3SIQKJ1cNRG%2BOHk6H2HPEkae9Amfh7Humpjadvk7JJgh0PBqO6uxYU8%2F7cMMvoEBVGiQSBReZ3GnTa1NoePB1FdIOSf9%2FtyVG53exKtXoZzbw32LbgduJOW8PXp4W%2FQg%2FbHvvo3przwZDlskw8jccv%2FdyyS18x1%2FY8h32Zd2kbL39GqaezzvQPhg5t3fVD7ZF0r%2FPtGaZwOJ7oeqQHlvcEOpFYaapJccwWtWp%2F9MHq0%2Fg4CCu%2BtLABbs3Ur5cG9YbKBCdcmb1%2Fv8uYP&amp;SigAlg=http%3A%2F%2Fwww.w3.org%2F2001%2F04%2Fxmldsig-more%23rsa-sha256&amp;Signature=eigXFEDziTGEPG8XCgCeetSPZgG%2FfXkY80dczsyRv3tuYvJpdo%2FL0vdlx46weo9KgeXWt8fh4PW2eEF3D35oeZ0b0DOLbYFt5vNwSxHmGm7Sv8oewksMompT0o7ADMckLKVPFQr1zdRmXiGUDHKfH3GRyddsQKlMedvl371haPZJnNMWW9Qu59sqyURpwwlG%2Bef0NrwzOuYdG2BzA2sSMuagTcVHkbcy7c19A4Sk6KwUOSmaw68r6B3pkFJCvHqfx%2Fj%2F8ApGU353FTnZXR44bOW07CcvzrbVYsDEWPueANjgyfYOXML2xO3NeiAC4pzkiyJcSXgYjESERIHOWPN%2BR6llfd12%2BMRgMo79qfvYmlA%2BYyG2nQKl%2FOEKOqbcoeWGwb5yltn6bbq9WMPT3eK9ZwfBA0IcSzWbtWVjMJf2qYEKgkl5Qw0uQgmEgsvQEX6OS%2BHWqhdoHigeCIkfgCnwk3LjZLQgSgUlPyiW9s0cj8Spd5zMBlAz96dszwsUU8S9r30qYaSHAK8%2B5iZNxJm08ww6Lygn9bDePH73eMJV0ZHyzgcxv%2Fahle9ndNHNACItisqlit3Tla%2FNqTIPFcVCiHZQ1F6hqQWO54m8ut4uyF1GWfUWMY%2F494EZnron1onhpY3dNKnvBDNnGitL%2BfHRvIK6gAf0f2qsVoQNRPFzn74%3D">click here</a> to continue.
+    </p>
+
+</div></div>
+
+
+    </div>
+
+    <div id="js-global-screen-reader-notice" class="sr-only mt-n1" aria-live="polite" aria-atomic="true" ></div>
+    <div id="js-global-screen-reader-notice-assertive" class="sr-only mt-n1" aria-live="assertive" aria-atomic="true"></div>
+  </body>
+</html>
