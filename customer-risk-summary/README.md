@@ -456,6 +456,9 @@ Before importing the full solution, test your custom regulatory agent.
 2. Go to: **☰ Menu → Build → Agent builder**  
 3. Select: **`regulatory_reporting_agent`**
 
+
+![Picture](images/Screenshot592.png) 
+
 ---
 
 **Step B: Test Your Custom Agent**
