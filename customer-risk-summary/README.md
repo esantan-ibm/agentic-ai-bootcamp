@@ -71,7 +71,7 @@ By automating these processes, the bank aims to reduce manual workload, improve 
 
 # Architecture
 
-![Picture](images/Picture1.jpg)
+![Picture](images/Picture1.png)
 
 # Pre-requisites
 
@@ -195,11 +195,11 @@ To do this, you will need **credentials** specific to your environment (such as 
 
 If you don’t have these details, **please check with your bootcamp instructor** before proceeding. (Refer the screen shots below)
 
-![Picture](images/Picture4.jpg)
+![Picture](images/Picture4.png)
 
 When you click **Launch watsonx Orchestrate**, it will take you to the **Orchestrate landing page**.
 
-![Picture](images/Picture5.jpg)
+![Picture](images/Picture5.png)
 
 On this page, click on **Settings** as shown in the screenshot provided.
 
@@ -223,7 +223,7 @@ Here’s what each part of the command means:
 - `--activate`: his sets the environment as the active one right after adding it Enter the API key generated in the previous step when prompted.
 
 
-![Picture](images/Picture7.jpg)
+![Picture](images/Picture7.png)
 
 ### Steps to Activate Your Environment and Create Tools and Agents
 
@@ -508,12 +508,18 @@ Where:
 - `-f`: The path to your .py file that contains the @tool function
 - `-r`: The path to your requirements.txt file listing dependencies
 
+![Picture](images/Picture8.png)
+
 Import the remaining YAML agent configurations:
 ```bash
 orchestrate agents import -f agents/customer_risk_profile.yaml
 orchestrate agents import -f agents/kyc_status.yaml
 orchestrate agents import -f agents/compliance_super_agent.yaml
 ```
+
+
+![Picture](images/Picture9.png)
+
 
 ### Verify Complete Import
 
@@ -530,7 +536,7 @@ You should see:
 
 ## Now Lets Test the Complete KYC Solution
 
-### Understanding the Agent Architecture
+### First Lets Understand the Agent Architecture
 
 **How the Super Agent Routes Queries:**
 - KYC application queries → `kyc_loan_application_review_agent`  
@@ -544,10 +550,6 @@ You should see:
 
 **The super agent acts as an intelligent dispatcher** - it never uses tools directly, only routes to specialists who then use their tools.
 
-![Picture](images/Picture8.jpg)
-
-![Picture](images/Picture9.jpg)
-
 
 ## 6\. How to Test Your Compliance Super Agent in the Watsonx Orchestrate UI 
 
@@ -558,7 +560,7 @@ Once your agents are imported and deployed, you can test them using the built-in
 
 ![Picture](images/Picture11.png)
 
-1.  From the _Agent_ section, select **compliance\_super\_agent** to open its builder workspace.
+3.  From the _Agent_ section, select **compliance\_super\_agent** to open its builder workspace.
 
 ![Picture](images/Picture12.png)
 
@@ -600,15 +602,15 @@ Test these queries in the preview chat and observe the routing behavior:
 
 1.  Once you have validated the answers, click on Deploy in the top right corner to deploy your agent:
 
-![Picture](images/Picture15.jpg)
+![Picture](images/Picture15.png)
 
 1.  Click on the hamburger menu in the top left corner and then click on Chat:
 
-![Picture](images/Picture16.jpg)
+![Picture](images/Picture17.png)
 
 1.  Make sure Compliance Super Agent is selected. You are now ready to test your agent:
 
-![Picture](images/Picture17.jpg)
+![Picture](images/Picture16.png)
 
 ## Practice Lab: Create and Experiment with Your Own Tools
 
