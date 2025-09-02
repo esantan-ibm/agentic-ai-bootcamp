@@ -11,7 +11,7 @@ tags:
     description: Operations related to mail retrieval
 
 servers:
-  - url: https://order-to-cash.1zo9y6v1tn1x.us-south.codeengine.appdomain.cloud
+  - url: https://order-to-cash.1zoa8r05j5dh.us-south.codeengine.appdomain.cloud
 
 paths:
   /get_order_updates/{order_id}:
