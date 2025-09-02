@@ -173,7 +173,7 @@ This Agent handles special banking operations for GFM Bank that require elevated
 
   ![Import from file](./assets/backoffice_ag_imgs/i16.png)
 
-- Download the following OpenAPI Spec file [bank.json](./assets/bank.json) and upload it here.
+- Download the following OpenAPI Spec file [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) and upload it here.
 
   ![Upload spec file](./assets/images/i38.png)
 
