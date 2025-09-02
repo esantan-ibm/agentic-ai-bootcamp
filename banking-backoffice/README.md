@@ -119,6 +119,12 @@ In this lab, you'll build a complete Agentic AI solution for GFM Bank using wats
 
   ![Agent Builder](./assets/images/i3.png)
 
+### IBAN Number assignments
+
+Throught this lab, you will be using IBAN numbers which correlate to fictional account number for you to transfer funds from and to. Got to the following document and locate your name. You will have two accounts assigned to you. Use those IBAN number when talking to the AI Agents in testing your work. Your choice to see choose which of the two IBAN number you wish to use for the From account and for the To account.
+
+[IBAN-list.md](IBAN-List.md)
+
 ### GFM Back Office Agent
 
 This Agent handles special banking operations for GFM Bank that require elevated privileges, such as approving overdrafts and processing fee reversals. Operates from the GFM Bank operations center.
@@ -410,13 +416,11 @@ This Agent acts as the trusted expert on all banking products and services offer
 
   ![Upload Files](./assets/prod_info_ag_imgs/i12.png)
 
-- Upload the listed documents below provided by the instructor and click **Next**
+- Download the following documents and then upload them and click **Next**
 
-  ```
-  list-of-prices-and-Services.pdf
-  ser-terms-conditions-debit-cards.pdf
-  Overdraft Services FAQ
-  ```
+  - [list-of-prices-and-Services.pdf](./assets/knowledgebase/list-of-prices-and-Services.pdf)
+  - [ser-terms-conditions-debit-cards.pdf](./assets/knowledgebase/ser-terms-conditions-debit-cards.pdf)
+  - [Overdraft_Services_FAQ.docx](./assets/knowledgebase/Overdraft_Services_FAQ.docx)
   
   ![Upload Documents](./assets/prod_info_ag_imgs/i11.png)
 
