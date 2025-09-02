@@ -99,7 +99,7 @@ With ADK, you can:
 
 Before proceeding, ensure the following requirements are met:
 
-**1. Python**
+**Python**
 
 **Version:** Python 3.12 or later
 **Check version:** python3.12 --version
@@ -225,23 +225,23 @@ Here’s what each part of the command means:
 
 ![Picture](images/Picture7.png)
 
-### Steps to Activate Your Environment and Create Tools and Agents
+## 3\. Steps to Activate Your Environment and Create Tools and Agents
 
-#### 3. Activate Your Environment
+#### Activate Your Environment
 Run the following command to activate the environment you created:
 ```bash
 orchestrate env activate <environment-name>
 ```
 Replace `<environment-name>` with the name you used earlier when adding the environment.
 
-# Optionally run the below commands to see if you have any existing tools, expected result should be NOTHING
+#### Optionally run the below commands to see if you have any existing tools, expected result should be NOTHING
 
 ```bash
 orchestrate tools list
 orchestrate agents list
 ```
 
-#### 4. Clone the Repository and Retrieve the Code
+## 4\. Clone the Repository and Retrieve the Code
 Once your virtual environment is active and your environment is configured, clone the bootcamp repository to get the required tools and agent files:
 ```bash
 git clone https://github.com/esantan-ibm/agentic-ai-bootcamp.git
@@ -445,7 +445,7 @@ chat_with_docs:
 orchestrate agents import -f agents/regulatory_reporting_agent.yaml
 ```
 
-#### 8. Test Your Custom Tools and Agent
+### 8. Test Your Custom Tools and Agent
 
 Before importing the full solution, test your custom regulatory agent.
 
@@ -461,7 +461,7 @@ Before importing the full solution, test your custom regulatory agent.
 
 ---
 
-**Step B: Test Your Custom Agent**
+### **Step B: Test Your Custom Agent**
 
 Try these test queries in the preview chat:
 
@@ -495,7 +495,7 @@ If everything works as expected, proceed to import the full solution.
 
 
 
-## Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
+### Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
 
 ### Import Additional Tools and Agents
 
@@ -536,7 +536,7 @@ You should see:
 - **9 total tools** (including your 2 custom tools)
 - **4 total agents** (including your custom regulatory agent)
 
-## Now Lets Test the Complete KYC Solution
+## 5\. Now Lets Test the Complete KYC Solution
 
 ### First Lets Understand the Agent Architecture
 
@@ -600,7 +600,7 @@ Test these queries in the preview chat and observe the routing behavior:
 ![Picture](images/Picture14.png
 )
 
-### Now Lets Deploy the Agent
+## 7\. Now Lets Deploy the Agent
 
 1.  Once you have validated the answers, click on Deploy in the top right corner to deploy your agent:
 
@@ -609,14 +609,13 @@ Test these queries in the preview chat and observe the routing behavior:
 1.  Click on the hamburger menu in the top left corner and then click on Chat:
 
 ![Picture](images/Picture17.png)
-
-1.  Make sure Compliance Super Agent is selected. You are now ready to test your agent:
+2.  Make sure Compliance Super Agent is selected. You are now ready to test your agent:
 
 ![Picture](images/Picture16.png)
 
 
 
-## 🎉 Congratulations! You have completed the lab!
+# 🎉 Congratulations! You have completed the lab!
 
 Now that you have successfully imported and tested the complete KYC solution, try creating your own tools to extend the capabilities. Follow the same **ADK tool creation process** you used earlier, using the given tools as a reference for structure, annotations, and requirements.
 
