@@ -360,11 +360,11 @@ In this section, you will build the **Order Management Agent**, a key collaborat
     ```
     ### **Trigger Condition**
     When a user initiates a conversation or asks a question containing the keyword 
-    ```show all orders or order management or manage orders or related phrases.```
+    `show all orders`, `order management`, `manage orders` or related phrases.
 
     ### **Step 1: Fetch and Display All POs**
-    * **Action**: Automatically trigger the `fetch_all_pos` tool.
-    * **Response Format (Example)**:
+    * **Action**: Automatically trigger the `get_all_po_details` tool.
+    * **Response Format**:
       ```Here is a list of all purchase orders:
       | PO Number   | POM ID | Submitted By     | User ID           |
       |-------------|--------|------------------|-------------------|
@@ -376,144 +376,148 @@ In this section, you will build the **Order Management Agent**, a key collaborat
     * **Action**: Wait for user input (PO number).
     * **Validation**:
       * If not found:
-        ```
-        No PO details found for the given PO number. Please try again or check your input.
-        ```
+        ```No PO details found for the given PO number. Please try again or check your input.```
       * If valid: Proceed to Step 3.
 
     ### **Step 3: Retrieve & Display PO details in a table format**
     * **Action**: Call `get_po_details(po_number)` tool.
     * **Response Example**:
-
-      ```Please confirm the PO details shown above. Do you want to proceed with this PO? (Yes/No)```
+      ```Here are the PO details:
+      | PO Number  | Quote Number   | Product Desc            |
+      |------------|----------------|-------------------------|
+      | 4300016793 | 55MS2022002018 | SVC.SEAFRT JSW ARJUNGAD |
+      Please confirm the PO details shown above. Do you want to proceed with this PO? (Yes/No)```
 
     ### **Step 4: Fetch & Display Quotation details in table format**
     * **Trigger Condition**: If the user confirms the PO.
-    * **Action**: Extract `quotation_number` from PO details and call `get_quotation_details(quotation_number)` tool.
+    * **Action**: Extract `quote_number` from PO details and call `get_quotation_details(quotation_number)` tool.
     * **Response Example**:
-
-      ```  Please confirm the quotation details. Shall we proceed with placing the order? (Yes/No)```
+      ```Here are the Quotation details:
+      | Quote Number   | Quantity  | Unit Rate | Taxable Value | Total Amount |
+      |----------------|-----------|-----------|---------------|--------------|
+      | 55MS2022002018 | 7,872.000 | 430.35    | 3,387,715.20  | 3,997,503.00 |
+      Please confirm the quotation details. Shall we proceed with placing the order? (Yes/No)```
 
     ### **Step 5: Confirm and Place Order**
     * **Trigger Condition**: If the user confirms the quotation.
     * **Action**: Call `display_confirmation` tool.
     * **Response Example**:
-
       ```The order was placed successfully. You can track your order with Order ID: #710004927```
 
     ### **Design Principles**
     * Ensure **one confirmation at a time** — first PO, then quotation.
-* Avoid overwhelming the user with too much information at once.
-* Validate user inputs and provide friendly recovery prompts if something goes wrong.
-* Format messages clearly with clean markdown-style tables and highlights.
+    * Avoid overwhelming the user with too much information at once.
+    * Validate user inputs and provide friendly recovery prompts if something goes wrong.
+    * Format messages clearly with clean markdown-style tables and highlights.
+    ```
 
-```
+    ![wxo order management agent behavior](./images/img15-1.png)
 
-Next, test the functionality of the agent by asking a question such as
+    Next, test the functionality of the agent by asking a question such as
 
- ```manage orders``` 
+    ```manage orders``` 
 
-  ```Show all orders``` 
+    ```Show all orders``` 
   
-  and its follow up questions and observe the response of the agent. Click the **Show Reasoning** link and note how the agent is correctly invoking the **Get All PO Details**, **Get Po Detail**, **Get Quotation Details**, **Get Matching Details** and **Display Confirmation** to retrieve relevant information.
+    and its follow up questions and observe the response of the agent. Click the **Show Reasoning** link and note how the agent is correctly invoking the **Get All PO Details**, **Get Po Detail**, **Get Quotation Details**, **Get Matching Details** and **Display Confirmation** to retrieve relevant information.
 
-![wxo order management agent behavior](./images/img16.png) 
-![wxo order management agent behavior](./images/img17.png)
-![wxo order management agent behavior](./images/img18.png)
-![wxo chat q3 reasoning](./images/img34.0.png)
+    ![wxo order management agent behavior](./images/img16.png)
+  
+    Continue by pasting the first PO Number into the chat and answer yes to each subsiquent question from the agent. Expand each *Show Reasoning* to validate the inputs and outputs for each tool called.
+    ![wxo order management agent behavior](./images/img17.png)
 
-44. At this point, you are ready to deploy your Agent. To do so, scroll to the bottom of the configuration page and make sure the slide bar next to Show agent is disabled. Next, click the **Deploy** button to deploy the agent and makes it available to be used as a collaborator agent.
+45. At this point, you are ready to deploy this Agent as a collaboration agent. To do so, scroll down to Channels at the bottom of the configuration page and make sure the slide bar next to Show agent is disabled. Next, click the **Deploy** button to deploy.
 
-![wxo order managemen agent deploy](./images/show-chat.png)
-![wxo order managemen agent deploy](./images/img19.png) 
+    ![wxo order managemen agent deploy](./images/img19.png) 
+
+    An press **Deploy** again
+    ![deploy again](./images/img19-1.png)
 
 *Congratulations!!* You have just completed developing the **Order Management Agent** empowered with tools for helping users retrieve PO and quotation details, validate input, and place orders efficiently.
 
 ## Pulling it together - Complete Agent Collaboration <a id="pulling-it-together"></a>
 Now that you have developed all agents and tools, in this section, you will work through the process of integrating the collaborator agents, testing and deploying the **Order-to-Cash Agent**.
 
-34. If you are not at the watsonx Orchestrate landing page (chat interface), repeat the earlier steps to make sure you are logged into IBM Cloud, find the watsonx Orchestrate service and launch it to access the landing page.
+46. Go back to the watsonx Orchestrate landing page by opening the navigation menu at the top left and clicking on Chat.
+![go back](./images/img19-2.png)
 
-35. On the watsonx Orchestrate landing page, which is the Chat UI, click **Manage agents**.
-
+47. On the watsonx Orchestrate landing page, which is the Chat UI, click **Manage agents**.
 ![wxo landing page manage agents](./images/wxo-landing-page-manage-agents.png) 
 
-36. On the Manage agents page, select the **Order-to-Cash Agent**.
-
+48. On the Manage agents page, click on the **Order-to-Cash Agent** tile.
 ![wxo collaborator agents](./images/img39.png) 
 
-37. On the **Order-to-Cash Agent** configuration page, scroll down to the **Toolset** section or click the **Toolset** shortcut, and then click **Add agent** to add a collaborator agent.
+49. On the **Order-to-Cash Agent** configuration page, scroll down to the **Toolset** section or click the **Toolset** shortcut, and then click **Add agent** to add collaborator agents.
+![add agent](./images/img22-0.png)
 
-38. On the pop-up, select **Add from local instance** tile. For reference, watsonx Orchestrate supports multiple approaches for adding collaborator agents.
-
+50. On the pop-up, select **Add from local instance** tile. For reference, watsonx Orchestrate supports multiple approaches for adding collaborator agents.
 ![wxo collaborator agents](./images/img22.png)  
 
-39. Select the checkbox next to both, the **Customer Support** and the **Order Management Agent** and click **Add to agent** button.
-
+51. Select the checkbox next to both, the **Customer Support** and the **Order Management Agent** and click **Add to agent** button.
 ![wxo financial analyst add collaborators](./images/img23.png) 
 
-40. Scroll further down to the **Behavior** section or click the **Behavior** shortcut and add the following **Instructions** to guide the agent in its reasoning and orchestration.
+52. Scroll further down to the **Behavior** section or click the **Behavior** shortcut and add the following **Instructions** to guide the agent in its reasoning and orchestration.
 
-Behavior instructions: 
-```
-## **Agent Role: Supervisor Agent** 
-  - This **Supervisor Agent** orchestrates and manages the flow of conversation by intelligently routing user queries to the appropriate   specialized agents based on the context.
----
+    Behavior instructions: 
+    ```
+    ## **Agent Role: Supervisor Agent** 
+    - This **Supervisor Agent** orchestrates and manages the flow of conversation by intelligently routing user queries to the appropriate   specialized agents based on the context.
+    ---
 
-###  **Responsibilities & Behavior**
-The Supervisor Agent oversees two domain-specific agents:
-1. **Order Management Agent**
-2. **Customer Support Agent**
----
+    ###  **Responsibilities & Behavior**
+    The Supervisor Agent oversees two domain-specific agents:
+    1. **Order Management Agent**
+    2. **Customer Support Agent**
+    ---
 
-###  **Triggering Logic**
-* **Order Management Queries**
-  *Trigger Condition*: When a user initiates a conversation or asks a question containing the keyword `show me all orders`,'manage orders' or related phrases.
-  *Action*: Automatically delegates the conversation to the **Order Management Agent**, which follows a structured step-by-step workflow to fetch and manage purchase orders and quotations.
+    ###  **Triggering Logic**
+    * **Order Management Queries**
+      * *Trigger Condition*: When a user initiates a conversation or asks a question containing the keyword `show me all orders`, `manage orders` or related phrases.
+      * *Action*: Automatically delegates the conversation to the **Order Management Agent**, which follows a structured step-by-step workflow to fetch and manage purchase orders and quotations.
 
-* **Customer Support Queries**
-  *Trigger Condition*: When the user asks for help using the keyword 'show me all emails', `customer support` or related intent.
-  *Action*: Passes control to the **Customer Support Agent**, which handles email-based inquiries, order updates, and customer communication workflows.
----
+    * **Customer Support Queries**
+      * *Trigger Condition*: When the user asks for help using the keyword `show me all emails`, `customer support` or related phrases.
+      * *Action*: Passes control to the **Customer Support Agent**, which handles email-based inquiries, order updates, and customer communication workflows.
+    ---
 
-###  **Fallback Behavior for General Queries**
-* **Non-Domain-Specific Queries (e.g., O2C questions)**
-  *Trigger Condition*: When the user query does not relate to either order management or customer support.
-  *Action*: Supervisor Agent routes the query to a **knowledge retrieval system** and returns the most relevant answer **directly without stating fallback context**.
----
+    ###  **Fallback Behavior for General Queries**
+    * **Non-Domain-Specific Queries (e.g., O2C questions)**
+      * *Trigger Condition*: When the user query does not relate to either order management or customer support.
+      * *Action*: Supervisor Agent routes the query to a **knowledge retrieval system** and returns the most relevant answer **directly without stating fallback context**.
+    ---
 
-###  **Design Principles**
-* **Intent Recognition First**: Clearly detect and route based on user input context.
-* **Delegation, Not Duplication**: Does not handle detailed tasks but ensures the right agent is activated.
-* **Natural Interaction Flow**: Smooth transitions without disrupting the user experience.
-* **No Overlap Between Agents**: Maintains clear boundaries to avoid confusion.
-* **Direct Answers for O2C and Other Topics**: No extra framing or disclaimers—only the relevant response.
+    ###  **Design Principles**
+    * **Intent Recognition First**: Clearly detect and route based on user input context.
+    * **Delegation, Not Duplication**: Does not handle detailed tasks but ensures the right agent is activated.
+    * **Natural Interaction Flow**: Smooth transitions without disrupting the user experience.
+    * **No Overlap Between Agents**: Maintains clear boundaries to avoid confusion.
+    * **Direct Answers for O2C and Other Topics**: No extra framing or disclaimers—only the relevant response.
+    ```
 
-```
+    Test the agent behavior in the **Preview** section by asking the following sample question:
 
-Test the agent behavior in the **Preview** section by asking the following sample question:
+    Question: 
 
-Question: 
+    ```Show me all emails for customer service```
 
-```Show me all emails for customer service```
+    ```customers list```
 
-``` customers list```
+    Expand the **Show Reasoning**, **Step 1**, and **Step 2** links to review the reasoning of the agent. Note that it is correctly retreiving information as it references the **Customer Support Agent** tool.
+    ![wxo knowledge base test](./images/img25.png) 
 
-Expand the **Show Reasoning** and **Step 1** links to review the reasoning of the agent. Note that it is correctly retreiving information as it references the **Customer Support Agent** tool.
+53. Continue testing your agent now by stressing the order management agent functionality and Knowledge base. To do so, ask the following question.
 
-![wxo knowledge base test](./images/img25.png) 
+    Question:
 
-41. Continue testing your agent now by stressing the order management agent functionality and Knowledge base. To do so, ask the following question.
+    ```Show me all order details``` 
 
-Question:
+    ```manage orders```
 
- ```Show me all order details``` 
+    ![order management](./images/img25-0.png)
 
- ```manage orders```
-
-42. At this point, you are ready to deploy your **Order-to-Cash Agent**. To do so, scroll to the bottom of the configuration page and make sure the slide bar next to **Show agent** is enabled (green) to make the **Order-to-Cash Agent** accessible on the chat interface. Click **Deploy** button to deploy your agent.
-
+54. At this point, you are ready to deploy your **Order-to-Cash Agent**. To do so, scroll to the bottom of the configuration page and make sure the slide bar next to **Show agent** is enabled (green) to make the **Order-to-Cash Agent** accessible on the chat interface. Click **Deploy** button to deploy your agent. Then click deploy again on the popup window.
 ![wxo  agent deploy](./images/img24.png)
+![wxo  agent deploy](./images/img24-1.png)
 
 *Congratulations!!* You have just developed and deployed the **Order-to-Cash Agent**.
 
@@ -521,50 +525,48 @@ Question:
 
 Now that you have deployed your **Order-to-Cash Agent**, you can interact with the agent using watsonx Orchestrate Conversational Interface.
 
-43. Click the top left navigation menu and select **Chat** to access the conversational interface.
-
+55. Click the top left navigation menu and select **Chat** to access the conversational interface.
 ![wxo chat ui](./images/wxo-chat-ui.png)
 
-44. On the **Chat UI**, note that now you have the **Order-to-Cash** as one of the available agents you can chat with. As you add more and more agents, you can select which agent you'd like to interact with by selecting the agent drop down list.
+56. On the **Chat UI**, note that now you have the **Order-to-Cash** as one of the available agents you can chat with. As you add more and more agents, you can select which agent you'd like to interact with by selecting the agent drop down list.
 With the **Order-to-Cash Agent** selected, try interacting by asking the following question and observe the response.
 
-Question: 
+    Question: 
 
-```Show me all emails for customer service```
+    ```Show me all emails for customer service```
 
-``` customers list```
+    ``` customers list```
 
-![wxo chat q1](./images/img26.png)
+    ![wxo chat q1](./images/img26.png)
 
-45. Expand the **Show Reasoning** and **Step 1** sections to investigate the agent's reasoning in retrieving the response from **customer support agent** tool and continue to have a conversation with the customer support workflow. 
+57. Expand the **Show Reasoning** and **Step 1** sections to investigate the agent's reasoning in retrieving the response from **customer support agent** tool and continue to have a conversation with the customer support workflow. 
 
-![wxo chat q1 reasoning](./images/img26copy.png)
-![wxo chat q1](./images/img27.png)
-![wxo chat q1](./images/img27.1.png)
+    ![wxo chat q1 reasoning](./images/img26copy.png)
+    ![wxo chat q1](./images/img27.png)
+    ![wxo chat q1](./images/img27.1.png)
 
-46. Next, ask the following question to get response from knowledge base.
+58. Next, ask the following question to get response from knowledge base.
 
-Question:
+    Question:
 
-```What should I do if there is an issue with my order delivery, such as delays or damaged goods ```
+    ```What should I do if there is an issue with my order delivery, such as delays or damaged goods ```
 
-```What payment methods are accepted?```
+    ```What payment methods are accepted?```
 
-Expand the **Show Reasoning** and **Step 1** sections to investigate the agent's reasoning in retrieving the response. In this case, the agent leverages the **knowledge base** to retrieve the response.
+    Expand the **Show Reasoning** and **Step 1** sections to investigate the agent's reasoning in retrieving the response. In this case, the agent leverages the **knowledge base** to retrieve the response.
 
-![wxo chat q2](./images/img28.png)
+    ![wxo chat q2](./images/img28.png)
 
-47. Next, try another question to retrieve the order details.
+59. Next, try another question to retrieve the order details.
 
-Question: 
+    Question: 
 
-```Show me all orders```
+    ```Show me all orders```
 
-Expand the **Show Reasoning** section and observe that the agent took 2 steps to retrieve the response for this question.
+    Expand the **Show Reasoning** section and observe that the agent took 2 steps to retrieve the response for this question.
 
-48. Now, let's try to explore what are the steps taken.
+60. Now, let's try to explore what are the steps taken.
 Expand the **Step 1** and **Step 2** sections and observe the agent transferring the request to the **Order Management Agent** to provide the order details of particular user.
-
 ![wxo chat q3 reasoning](./images/img31.png)
 ![wxo chat q3 reasoning](./images/img32.png)
 ![wxo chat q3 reasoning](./images/img33.png)
