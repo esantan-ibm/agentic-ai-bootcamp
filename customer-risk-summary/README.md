@@ -250,7 +250,7 @@ cd customer-risk-summary
 
 ## Create Your Own Tool and Agent (Mandatory Student Exercise)
 
-Now that you've cloned the repository, you will create your own tool and agent before importing the default ones. This will give you hands-on experience building from scratch.
+Now that you've cloned the repository, you will create your own tool called **regulatory_reporting_tools**, and agent called **regulatory_reporting_agent** before importing the default ones. This will give you hands-on experience building from scratch.
 
 ### 1. Create Your Own Tool File
 
@@ -410,7 +410,7 @@ cd ../agents
 touch regulatory_reporting_agent.yaml
 ```
 
-Add this content to `regulatory_reporting_agent.yaml`:
+Add the below content to `regulatory_reporting_agent.yaml`:
 
 ```yaml
 spec_version: v1
@@ -494,9 +494,8 @@ Your test interface should look similar to this:
 If everything works as expected, proceed to import the full solution.
 
 
-## Import Complete KYC Solution
 
-Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
+## Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
 
 ### Import Additional Tools and Agents
 
@@ -551,7 +550,7 @@ You should see:
 - **Risk Agent:** risk profiling, transaction analysis, pattern detection  
 - **Regulatory Agent:** compliance reports, audit log search
 
-**The super agent acts as an intelligent dispatcher** - it never uses tools directly, only routes to specialists who then use their tools.
+**The super agent acts as an intelligent dispatcher** - it never uses tools directly, only routes to agents based on query who then uses their tools.
 
 
 ## 6\. How to Test Your Compliance Super Agent in the Watsonx Orchestrate UI 
@@ -615,9 +614,14 @@ Test these queries in the preview chat and observe the routing behavior:
 
 ![Picture](images/Picture16.png)
 
-## Practice Lab: Create and Experiment with Your Own Tools
 
-Now that you have successfully imported and tested the complete KYC solution, try creating your own tools to extend the capabilities. Follow the same **ADK tool creation process** you used earlier, using the given tools as a reference for structure, annotations, and requirements. 
+
+## 🎉 Congratulations! You have completed the lab!
+
+Now that you have successfully imported and tested the complete KYC solution, try creating your own tools to extend the capabilities. Follow the same **ADK tool creation process** you used earlier, using the given tools as a reference for structure, annotations, and requirements.
+
+# Takehome References
+## Practice Lab: Create and Experiment with Your Own Tools
 
 Here are some example tool ideas you can implement for practice:
 
@@ -628,7 +632,7 @@ Here are some example tool ideas you can implement for practice:
 * **customer_activity_timeline_tool** – Generate a chronological view of a customer's activities
 * **multi_account_detection_tool** – Detect if a single customer is linked to multiple accounts
 
-#### **OPTIONAL**
+## **Deployment of Local Instance of WxO**
 
 ### If you want to run a local instance of Watsonx Orchestrate Developer Edition on your own laptop (instead of relying on the cloud-hosted TechZone environment), you will need to install and configure Docker
 
@@ -692,4 +696,9 @@ Your next steps:
 - Combine your new tools into extended agents for richer automation
 - Explore other use cases where agentic AI can provide business value
 
-**Congratulations!** You've now completed the full cycle of building, deploying, and testing an intelligent KYC Agent with Watsonx Orchestrate and the ADK. Take what you've learned here and continue experimenting to enhance your agents and explore more automation possibilities in your environment.
+## 📚 Resources
+
+For more information on Watsonx Orchestrate and Agentic AI:
+- [Watsonx Orchestrate Documentation](https://www.ibm.com/products/watsonx-orchestrate)
+- [IBM Agentic AI Guide](https://www.ibm.com/think/ai-agents)
+- [Banking Industry AI Transformation](https://www.ibm.com/industries/banking-financial-markets)
