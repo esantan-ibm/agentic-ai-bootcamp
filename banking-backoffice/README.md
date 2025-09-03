@@ -478,7 +478,7 @@ This Agent acts as the trusted expert on all banking products and services offer
   ```
     ![Prod Agent Knowledge Description](./assets/prod_info_ag_imgs/i10.png)
 
-- All the uploaded files and description will look like this:
+- All the uploaded files and description will look like this: (*it may take a minute or two for the documents to appear*)
 
   ![Prod Agent Knowledge Description](./assets/prod_info_ag_imgs/i9.png)
 
