@@ -337,7 +337,7 @@ In this section, you will build the **Order Management Agent**, a key collaborat
 ![tools](./images/img12-3.png)
 ![tools](./images/img12-4.png)
 
-41. On the Import tool page, drag and drop the **order_management.yml** spec file provided by your instructor and click **Next**.
+41. Right click and select **Save Link As** on [order_management.yml](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/order-to-cash/practitioner_docs/order_management.yml) to download the OpenAPI spec file, then upload it here and click **Next**.
 ![wxo order managemen agent tool import openapi](./images/img13.png) 
 
 42. Next, select the checkboxes for the **Get All PO Details**, **Get Po Detail**, **Get Quotation Details**, **Get Matching Details** and **Display Confirmation** operation and click **Done**.
