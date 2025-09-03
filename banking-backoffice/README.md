@@ -107,7 +107,10 @@ In this lab, you'll build a complete Agentic AI solution for GFM Bank using wats
 
 ### Connect to your assigned Watsonx Orchestrate instance
 
-- Log in to IBM Cloud (cloud.ibm.com). Navigate to the top-left hamburger menu, then to the Resource List. Open the AI/Machine Learning section. You should see a **watsonx Orchestrate** service, click to open
+- Log in to IBM Cloud (cloud.ibm.com). Make sure you are connected to the bootcamp account as illustrated below. You should have received an email with the account name.
+  ![Account selection](./assets/images/i0.png)
+
+- Navigate to the top-left hamburger menu, then to the Resource List. Open the AI/Machine Learning section. You should see a **watsonx Orchestrate** service, click to open
 
   ![Watsonx Orchestrate service](./assets/images/i1.png)
 
@@ -173,7 +176,7 @@ This Agent handles special banking operations for GFM Bank that require elevated
 
   ![Import from file](./assets/backoffice_ag_imgs/i16.png)
 
-- Right click on [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) and select **Save Link as** (in Safari: *Download Linked File As* ) to download the OpenAPI Spec file and then upload it here.
+- Right click on [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) and select **Save Link as** (in Safari: *Download Linked File As*) to download the OpenAPI Spec file and then upload it here.
 
   ![Upload spec file](./assets/images/i38.png)
 
