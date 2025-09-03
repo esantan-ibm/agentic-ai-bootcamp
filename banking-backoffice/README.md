@@ -290,7 +290,7 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
 
   ![Import from file](./assets/teller_ag_imgs/i21.png)
 
-- Upload the same [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) file that you used above then select **Next**.
+- Upload the same [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) file that you used above and then select **Next**.
   
   ![Upload spec file](./assets/images/i38.png)
 
@@ -354,7 +354,7 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
 
 #### Test and deploy the GFM Teller Agent
 
-- In the preview window on the right, test with the following query:
+- In the preview window on the right, test with the following query: (*use one of the IBAN numbers assigned to you*)
 ```
 What is the balance of my account IBAN DE89320895326389021994
 ```
