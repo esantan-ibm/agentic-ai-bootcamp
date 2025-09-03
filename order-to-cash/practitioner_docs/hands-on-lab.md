@@ -26,14 +26,6 @@ In this lab, we will build an O2C agent in watsonx Orchestrate that simulates in
 
 <img width="900" alt="image" src="./images/arch.png">
 
-## Pre-requisites
-To run the steps in this hands-on lab portion of the bootcamp, you need access to **watsonx Orchestrate** and **watsonx.ai** which are provided for you as part of the preparation for this bootcamp.
-
-- Please go the through the [environment-setup](https://github.ibm.com/skol/agentic-ai-client-bootcamp/tree/release/v3.0.0/environment-setup) guide for steps on API key creation, and project setup.
-
-- Check with your instructor to make sure **all systems** are up and running before you continue.
-
-
 ## watsonx Orchestrate
 As detailed in the [Solution Architecture](./images/o2c-arch-sb.png), we will build and deploy the majority of the agents for the solution in watsonx Orchestrate. AI Agents are autonomous entities that can run tasks, decide and interact with their environment. In IBM watsonx Orchestrate, agents are a key component of our agentic AI framework, enabling the creation of complex, dynamic systems that can adapt and respond to changing conditions. 
 
