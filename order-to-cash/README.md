@@ -56,9 +56,3 @@ Key business benefits observed through this transformation include:
 Please find the step-by-step instructions on how you can implement this use case with the two workflows.
 
 - [Order-to-Cash](./practitioner_docs/hands-on-lab.md)
-
-## 🎥 Demo
-
-
-https://github.ibm.com/skol/agentic-ai-client-bootcamp/assets/452897/ba04c942-cb09-4a4b-a56c-6a0aa57b9e7d
-
