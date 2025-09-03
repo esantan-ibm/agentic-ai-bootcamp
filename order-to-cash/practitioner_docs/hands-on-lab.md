@@ -182,7 +182,7 @@ In this section, you will create the Customer Support Agent, a collaborator agen
     ![wxo tool options](./images/img4.png) 
     ![wxo tool options](./images/img4.1.png) 
 
-26. On the Import tool page, drag and drop the **[customer_support.yml](./customer_support.yml)** spec file provided by your instructor and click **Next**.
+26. Right click and select **Save Link As** on [customer_support.yml](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/order-to-cash/practitioner_docs/customer_support.yml) to download and upload it here then click **Next**.
 ![wxo tool import openapi](./images/img2.png) 
 
 27. Next, select the checkboxes for the **Get Order Details**, **Get All Orders** and **Get All Mails** operations and click **Done**.
