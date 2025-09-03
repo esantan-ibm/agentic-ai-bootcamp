@@ -184,7 +184,7 @@ This Agent handles special banking operations for GFM Bank that require elevated
 
   ![Select Tools](./assets/backoffice_ag_imgs/i7.png)
 
-- You should see the following under **Tools**:
+- You should see the following under **Tools**: (*It may take a minute for the tools to appear*)
 
   ![Loaded tools](./assets/backoffice_ag_imgs/i9.png)
 
@@ -221,7 +221,7 @@ This Agent handles special banking operations for GFM Bank that require elevated
 
 #### Test and deploy the GFM Back Office Agent
 
-- In the preview window on the right, test with the following query, using the IBAN you have been assigned:
+- In the preview window on the right, test with the following query, using the IBAN you have been assigned: (*replace the IBAN number with one of the numbers assigned to you*)
   ```
   I want to request an overdraft of 1000 EURO for my account IBAN DE89320895326389021994
   ```
@@ -290,7 +290,7 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
 
   ![Import from file](./assets/teller_ag_imgs/i21.png)
 
-- Upload the `bank.json` API spec provided by the instructor. Once the file is uploaded, select **Next**.
+- Upload the same [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) file that you used above then select **Next**.
   
   ![Upload spec file](./assets/images/i38.png)
 
