@@ -419,7 +419,7 @@ This Agent acts as the trusted expert on all banking products and services offer
 
   ![Upload Files](./assets/prod_info_ag_imgs/i12.png)
 
-- Right click on each of the following documents and click on Download Link as to download and then upload them and click **Next**
+- Right click on each of the following documents and click on **Save Link as** to download and then upload them and click **Next**
 
   - [list-of-prices-and-Services.pdf](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/knowledgebase/list-of-prices-and-Services.pdf)
   - [ser-terms-conditions-debit-cards.pdf](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/knowledgebase/ser-terms-conditions-debit-cards.pdf)
