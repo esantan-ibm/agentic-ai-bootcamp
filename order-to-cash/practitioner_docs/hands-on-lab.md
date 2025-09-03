@@ -110,7 +110,7 @@ After the AI Agent is created, you will go through the process of configuring th
 14. For the knowledge source, you will be uploading a PDF. Select **Upload files** from the available sources and then click *Next*.
 ![Knowledge Source List](./images/21-1.png)
 
-15. Drag and drop [Order_to_Cash_FAQs.pdf](./Order_to_Cash_FAQs.pdf) and then click *Next*.
+15. Right click and select **Save Link As** to download [Order_to_Cash_FAQs.pdf](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/order-to-cash/practitioner_docs/knowledgebase/Order_to_Cash_FAQs.pdf) and then upload it here and click *Next*.
 ![Knowledge Base Upload](./images/21-2.png)
 
 16. Now you will provide a description to the Agent of the knowledge base contents that was uploaded. Provide the following description and click *Save*.
