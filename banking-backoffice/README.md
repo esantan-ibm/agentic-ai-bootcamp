@@ -124,7 +124,7 @@ In this lab, you'll build a complete Agentic AI solution for GFM Bank using wats
 
 ### IBAN Number assignments
 
-Throught this lab, you will be using IBAN numbers which correlate to fictional account number for you to transfer funds from and to. Got to the following document and locate your name. You will have two accounts assigned to you. Use those IBAN number when talking to the AI Agents in testing your work. Your choice to see choose which of the two IBAN number you wish to use for the From account and for the To account.
+Throught this lab, you will be using IBAN numbers which correlate to fictional account numbers for you to transfer funds to and from. Go to the following document and locate your name. You will have two accounts assigned to you. Use those IBAN numbers when talking to the AI Agents in testing your agents. Your choice to choose which of the two IBAN numbers you wish to use for the to account and for the from account. (*Right click and open in a new tab or browser so that you do not lose your place in the instructions*)
 
 [IBAN-list.md](IBAN-List.md)
 
