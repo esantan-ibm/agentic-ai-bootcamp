@@ -104,7 +104,7 @@ After the AI Agent is created, you will go through the process of configuring th
 
 12. On the agent configuration page, review the *Description* of the agent in the **Profile** section and keep as is (no edits necessary).
 
-13. Scorll down to the **Knowledge** section, or click the **Knowledge** shortcut and click the *Choose knowledge* button under Knowledge source.
+13. Scroll down to the **Knowledge** section, or click the **Knowledge** shortcut and click the *Choose knowledge* button under Knowledge source.
 ![Choose knowledge](./images/21-0.png)
 
 14. For the knowledge source, you will be uploading a PDF. Select **Upload files** from the available sources and then click *Next*.
