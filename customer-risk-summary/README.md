@@ -205,9 +205,22 @@ On this page, click on **Settings** as shown in the screenshot provided.
 
 ![Picture](images/Picture6.png)
 
+
 On the **Settings** page, locate and note down the **Service Instance URL**. This URL will be required when configuring your environment in the ADK.
 
-Next, click on **Generate API Key** to create the authentication key. Be sure to copy and securely save the API key, as it will not be displayed again.
+Next, click on **Generate API Key** to create the authentication key.This will take you **API keys** page, please click on **create** as shown below
+
+![Picture](images/image1.png)
+
+Then add a name and description of your choice, select **nothing** for leaked action and select **No** for session management then click **create**
+![Picture](images/image2.png)
+
+
+
+
+![Picture](images/image.png)
+
+ Be sure to **copy** and securely save the API key, as it will not be displayed again.
 
 With the credentials ready, you can add the environment by running the following command:
 
