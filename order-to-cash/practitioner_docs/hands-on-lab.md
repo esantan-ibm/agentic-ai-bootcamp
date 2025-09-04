@@ -407,11 +407,9 @@ In this section, you will build the **Order Management Agent**, a key collaborat
 
     Next, test the functionality of the agent by asking a question such as
 
-    ```manage orders``` 
-
     ```Show all orders``` 
   
-    and its follow up questions and observe the response of the agent. Click the **Show Reasoning** link and note how the agent is correctly invoking the **Get All PO Details**, **Get Po Detail**, **Get Quotation Details**, **Get Matching Details** and **Display Confirmation** to retrieve relevant information.
+    and its follow up questions and observe the response of the agent. Click the **Show Reasoning** link and note how the agent is invoking the **Get All PO Details**, **Get Po Detail**, **Get Quotation Details**, **Get Matching Details** and **Display Confirmation** to retrieve relevant information.
 
     ![wxo order management agent behavior](./images/img16.png)
   
