@@ -714,3 +714,45 @@ For more information on Watsonx Orchestrate and Agentic AI:
 - [Watsonx Orchestrate Documentation](https://www.ibm.com/products/watsonx-orchestrate)
 - [IBM Agentic AI Guide](https://www.ibm.com/think/ai-agents)
 - [Banking Industry AI Transformation](https://www.ibm.com/industries/banking-financial-markets)
+
+
+
+
+EXTRAS
+
+Template structure for standerdization
+
+``` yaml
+
+spec_version: v1
+style: default
+name: [business_domain]_[function]_agent
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+description: >
+  [TEMPLATE - Replace with your content]
+  A [ROLE/PURPOSE] assistant designed to help [TARGET_USERS] with [PRIMARY_FUNCTIONS].
+  Specializes in [DOMAIN_EXPERTISE] for [BUSINESS_CONTEXT].
+
+instructions: >
+  [TEMPLATE - Replace with your content]
+  BEHAVIOR GUIDELINES:
+  - When [TRIGGER_CONDITION], use [SPECIFIC_TOOL] to [EXPECTED_ACTION]
+  - When [TRIGGER_CONDITION], call [SPECIFIC_TOOL] to [EXPECTED_ACTION]
+  - [Continue pattern for each major workflow]
+  
+  RESPONSE STANDARDS:
+  - Use [TONE/STYLE] language for all responses
+  - If [ERROR_CONDITION], inform the user [HOW_TO_HANDLE]
+  - [Additional response guidelines]
+
+tools:
+  - [tool_name_1]
+  - [tool_name_2]
+
+chat_with_docs:
+  enabled: [true/false]
+
+collaborators: # Only for super/coordinator agents
+  - [sub_agent_name_1]
+  - [sub_agent_name_2]
+  ```
