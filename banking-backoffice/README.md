@@ -214,8 +214,8 @@ This Agent handles special banking operations for GFM Bank that require elevated
   
   Maintain a professional tone with appropriate formality for a banking representative with elevated privileges.
   ```
-
-- Since this agent will be a collaborator agent and will be invoked by GFM Bank Orchestrator, we don't want to enable it for direct chat on the chat homepage. Disable the **Show agent** feature in the **Channels** section.
+  ![Instructions](./assets/backoffice_ag_imgs/i11-0.png)
+- Since this agent will be a collaborator agent and will be invoked by GFM Bank Orchestrator, we don't want to enable it for direct chat on the chat homepage. Disable the **Home page** feature in the **Channels** section.
 
   ![Instructions](./assets/backoffice_ag_imgs/i11.png)
 
