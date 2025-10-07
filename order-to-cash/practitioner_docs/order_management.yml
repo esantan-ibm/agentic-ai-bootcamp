@@ -17,7 +17,7 @@ tags:
     description: Display Confirmation
 
 servers:
-  - url: https://order-to-cash.1zoa8r05j5dh.us-south.codeengine.appdomain.cloud
+  - url: https://order-to-cash-app.216qgyjwhlbp.us-south.codeengine.appdomain.cloud
 
 paths:
   /get_all_pos:
