@@ -23,7 +23,6 @@ You will acquire practical, hands-on experience building and deploying intellige
 
 * **Apply these skills to real-world KYC use cases** by streamlining onboarding, ensuring ongoing risk monitoring, and improving compliance efficiency through end-to-end intelligent automation.  
 
----
 
 ## The Problem
 
@@ -50,7 +49,7 @@ With rising regulatory pressure and an expanding customer base, the bank require
 
 An intelligent, autonomous KYC Agent equipped with purpose-built tools such as identity verification, document extraction, customer profiling, and risk scoring can transform this process. By automating repetitive compliance tasks and enabling realtime access to customer data, the agent can provide faster onboarding, reduce operational effort, and ensure consistent adherence to regulatory standards. This approach also enhances decision-making by delivering proactive risk insights and eliminating the delays caused by manual review cycles.
 
-# Objective
+## Objective
 
 **FinTrust** Bank plans to implement an AI-powered KYC Agent to support compliance and risk teams in continuously monitoring and managing customer risk profiles. The goal is to build an agentic AI solution that intelligently orchestrates KYC verification, transaction monitoring, and risk scoring systems to deliver proactive, real-time compliance insights. The KYC Agent will assist teams in executing the following tasks:
 
@@ -62,7 +61,7 @@ An intelligent, autonomous KYC Agent equipped with purpose-built tools such as i
 
 By automating these processes, the bank aims to reduce manual workload, improve compliance accuracy, and ensure consistent, audit-ready monitoring across the customer lifecycle.
 
-# Business Value
+## Business Value
 
 *   **Accelerates customer onboarding** by removing manual steps and reducing delays.
 *   **Improves operational efficiency** by minimizing repetitive tasks and manual follow-ups.
@@ -77,14 +76,14 @@ By automating these processes, the bank aims to reduce manual workload, improve 
 
 *   Check with your instructor to make sure **all systems** are up and running before you continue.
 *   Validate that you have access to the right techzone environment for this lab.
-*   Validate that you have access to a credentials file that you instructor will share with you before starting the labs.
+<!-- *   Validate that you have access to a credentials file that you instructor will share with you before starting the labs. -->
 
 # Accessing Your Watsonx Orchestrate Instance
 
 *   A TechZone environment has been reserved for you, and you will receive the access details via email.
 *   To access your Watsonx Orchestrate instance, **please check with your instructor** for the access link and the necessary steps.
 
-# Getting Started with the Agent Development Kit (ADK)
+## Getting Started with the Agent Development Kit (ADK)
 
 The **Agent Development Kit (ADK)** is a set of tools that helps you build, test, and manage AI agents for watsonx Orchestrate. It gives developers full control using a simple CLI and a lightweight framework.
 
@@ -99,7 +98,29 @@ With ADK, you can:
 
 Connect to your ADK lab environment as instructed during the previous setup session.
 
-### 2\. Clone the Repository and Retrieve the Code
+### 2. Start Rancher Desktop
+
+Rancher Desktop is a container runtime environment which support the docker command line interface. In this lab, you will use the ADK to start a local watsonx Orchestrate environment made up of various containers. These containers will run inside of the Rancher Desktop runtime environment.
+
+Double click the **Rancher Desktop** icon found the the Windows desktop. The Rancher Desktop application window will appear. Wait until the status bar at the bottom right of the application window disappears. When it is gone, the Rancher Desktop runtime environment is fully operational.
+
+![rancher desktop](images/rancher-startup.png)
+
+### 3. Start the local watsonx Orchestrate development environment
+
+To start the local watsonx Orchestreate development environment, there is a simple BAT script located on the Windows desktop. This script will start the local wxOrchestrate development environment as well as open a browser window to the wxOrchestreate chat web interface.
+
+Double click on the **START.BAT** icon found on the Windows desktop. A command prompt will open showing the startup status of the local wxOrchestrate development environment.
+
+Once wxOrchestrate is up and running, a browser window will open to the wxOrchestrate chat web interface. You may close this browser for now. As you progress through the lab, you will be shown how to open this web interface again.
+
+On the command prompt that was opened after double clicking the **START.BAT** icon, you should see `Press any key to continue...`. Go ahead an press the enter key on your keyboard or any other key to close this command prompt window.
+
+The local watsonx Orchestrate developmen environment is now operational.
+
+![start wxo](images/pause-continue.png)
+
+### 4. Clone the Bootcamp code Repository
 In the ADK lab environment, open a new command prompt and execute the following command to clone the bootcamp repository to download the required tools and agent files:
 
 ```cmd
@@ -108,12 +129,15 @@ git clone https://github.com/esantan-ibm/agentic-ai-bootcamp.git
 
 ![clone](images/clone-repo.png)
 
-### 3. Open the cloned code in VSCode
-From the same command prompt above, execute the command below to open VSCode with the working directory `customer-risk-summary` witin the cloned repo.
+### 5. Open the Customer Risk Summary working directory in VSCode
+
+From the same command prompt above, execute the command below to open VSCode with the working directory `customer-risk-summary` found in the bootcamp cloned repository.
 
 ```cmd
 code agentic-ai-bootcamp/customer-risk-summary
 ```
+
+![vscode](images/vscode.png)
 
 ## Create Your Own Tools and Agent (Mandatory Student Exercise)
 
@@ -240,11 +264,11 @@ def audit_log_search_tool(customer_id: str) -> str:
 
 ### 2. Open new Terminal window within VSCode
 
-On the top menu bar in VSCode, expand the `Terminal` menu and select `New Terminal`. A new terminal pane will open on at the bottom of the center pane.
+On the top menu bar in VSCode, expand the `Terminal` menu and select `New Terminal`. A new terminal window will open at the bottom of the center pane.
 
 ![new terminal](images/new-terminal.png)
 
-### 3. Validate the Tool Python Code
+### 3. Verify Tool Python Code
 
 Execute the following command to verify the python code has no syntax errors. There should be no output which means no syntax errors were found.
 
@@ -335,30 +359,26 @@ Execute the following command in the terminal to see all available agents in you
 orchestrate agents list
 ```
 
-You should see the `regulatory_reporting_agent` listed.
+You should see `regulatory_reporting_agent` listed.
 
 ![verify tools](images/verify-agents-list.png)
 
 ### 9. Test Your Custom Tools and Agent
 
-Before importing the full solution, test your custom regulatory agent.
+Before importing the remainder of the full solution, test your custom regulatory agent.
 
----
-
-### **Step A: Access Agent through Agent Builder**
-1. Open your **Watsonx Orchestrate** web interface by executing the following command in the terminal
+#### **Step A: Access Agent through Agent Builder**
+1. Open your **watsonx Orchestrate** web interface by executing the following command in the VSCode terminal
     ```
     orchestrate chat start
     ```
-    You can maximaze the browser window that opens up to view the interface better.
+    You can maximaze the browser window that opens to view the interface better.
 2. Click on **Manage agents** at the bottom left of the page
     ![manage agents](images/manage-agents.png)
 3. Select your `regulatory_reporting_agent` tile
     ![open agent](images/open-agent.png)
 
----
-
-### **Step B: Test Your Custom Agent**
+#### **Step B: Test Your Custom Agent**
 
 Try these test queries in the preview chat:
 
@@ -387,7 +407,7 @@ Your test interface should look similar to this:
 
 ![tests](images/test-agent.png)
 
-You can expand each response's reasoning to verify the proper tools are being called.
+You can expand each the response reasonings to verify the proper tools are being called.
 
 ![reasoning](images/agent-reasoning.png)
 
@@ -396,9 +416,9 @@ If everything works as expected, proceed to import the full solution.
 
 ## Import Full Solution
 
-### Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
+#### Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
 
-### Import Additional Tools and Agents
+### Import Additional Tools
 
 You will now import the following tools:
 
@@ -426,6 +446,7 @@ Where:
 
 ![Picture](images/import-remaining-tools.png)
 
+### Import Additional Agents
 You will now import the following agents:
 
 * customer_risk_analysis_agent
@@ -446,7 +467,7 @@ orchestrate agents import -f agents/compliance_super_agent.yaml
 ### Verify Complete Import
 
 Verify that all tools and agents have been imported successfully.
-Execute the following to commands to list all tools and agents listed in your wxOrchestrate environment:
+Execute the following to commands to list all tools and agents available in your local wxOrchestrate environment:
 
 ```bash
 orchestrate tools list
@@ -457,11 +478,13 @@ orchestrate agents list
 ![all agents](images/all-agents-list.png)
 
 
-You should see at minimum (you may see more pre-existing tools and agents which you did not import):
+You should see at minimum:
 - **9 total tools** (including your 2 custom tools)
 - **4 total agents** (including your custom regulatory agent)
 
-## 10\. Now Lets Test the Complete KYC Solution
+*You may see more pre-existing tools and agents which you did not import. This is ok as they are remnants from when this lab was being created.*
+
+## 10\. Complete KYC Solution (How it works)
 
 ### First Lets Understand the Agent Architecture
 
@@ -480,7 +503,7 @@ You should see at minimum (you may see more pre-existing tools and agents which 
 
 ## 11\. How to Test Your Compliance Super Agent in the Watsonx Orchestrate UI 
 
-Once your agents are imported and deployed, you can test them using the built-in chat interface:
+Once your agents are imported, you can test them using the built-in chat interface:
 
 1. Open the wxOrchestrate web interface by executing the following command in the VSCode terminal:
     ```
@@ -527,9 +550,9 @@ Test these queries in the preview chat and observe the routing behavior:
 
     ![Picture](images/test-compliance-super-agent-2.png)
 
-## 7\. Now Lets test the Compliance Super Agent in the Agent Chat
+## 12\. Now Lets test the Compliance Super Agent in the Agent Chat
 
-Because this is a locally running watsonx Orchestrate development environment, agents are automatically deployed to the Agent Chat interface. You will notice the **Deploy** button on the upper right corner is greyed out inidating it is inactive and un-clickable. In a SaaS or on-prem wxOrchestrate environment, you would need to click this **Deploy** button for changes to be deployed in order for other users to be able to interact with the agent.
+Because this is a locally running watsonx Orchestrate development environment, agents are automatically deployed to the Agent Chat interface. You will notice the **Deploy** button on the upper right corner is greyed out indicating it is inactive and un-clickable. In a SaaS or on-prem wxOrchestrate environment, you would need to click this **Deploy** button so that new agents and changes to existing agents are made available for other users to access.
 
 <!-- 1.  Once you have validated the answers, click on Deploy in the top right corner to deploy your agent:
 
@@ -542,9 +565,34 @@ Because this is a locally running watsonx Orchestrate development environment, a
 
 ![Picture](images/Picture16.png) -->
 
-Navigate to the Agent Chat page by clicking on the blue **Agent chat** link on in the navigation on the upper left of the page.
+Navigate to the Agent Chat page by clicking on the blue **Agent chat** link on in the navigation links on the upper left of the page.
 
 ![agent chat](images/back-to-agent-chat.png)
+
+Expand the **Agents** dropdown menu and select the **compliance_super_agent** agent.
+
+![agent chat selection](images/agent-chat-selection.png)
+
+And test all the queries as above.
+1. `Show me the pending KYC applications for review`
+    - *Expected: Routes to KYC agent, shows application table*
+
+2. `Start review for Ryan Hogan's application`
+    - *Expected: Shows Ryan Hogan's details (Ireland, High risk)*
+
+3. `Show the KYC requirements summary for this customer`
+    - *Expected: Shows High risk KYC requirements*
+
+4. `Why is the risk level of this customer high?`
+    - *Expected: Lists risk triggers for Ryan Hogan*
+
+5. `Show the risk profile summary for customer id - cust001`
+    - *Expected: Routes to risk analysis agent, shows risk profile*
+
+6. `Review the recent transactions for this customer`
+    - *Expected: Shows transaction analysis with risk flags*
+
+![agent chat test](images/agent-chat-test.png)
 
 # 🎉 Congratulations! You have completed the lab!
 
