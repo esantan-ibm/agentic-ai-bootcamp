@@ -95,6 +95,588 @@ With ADK, you can:
 *   Set up your local environment Install the ADK
 *   Deploy your first agent to a watsonx Orchestrate instance
 
+### 1. Connecting to your ADK lab environment
+
+Connect to your ADK lab environment as instructed during the previous setup session.
+
+### 2\. Clone the Repository and Retrieve the Code
+In the ADK lab environment, open a new command prompt and execute the following command to clone the bootcamp repository to download the required tools and agent files:
+
+```cmd
+git clone https://github.com/esantan-ibm/agentic-ai-bootcamp.git
+```
+
+![clone](images/clone-repo.png)
+
+### 3. Open the cloned code in VSCode
+From the same command prompt above, execute the command below to open VSCode with the working directory `customer-risk-summary` witin the cloned repo.
+
+```cmd
+code agentic-ai-bootcamp/customer-risk-summary
+```
+
+## Create Your Own Tools and Agent (Mandatory Student Exercise)
+
+Before importing the default tools and agents found in the cloned repository, you will create your own tools named **report_generator_tool** and **audit_log_search_tool**, collectively known as your Regulatory Reporting Tools. You will also be creating your own agent named **regulatory_reporting_agent**. This will give you hands-on experience building from scratch.
+
+### 1. Create new Tools
+
+On the left pane within VSCode, right click on the `tools` folder and select `New File...`. Name the new file `regulatory_reporting_tools.py`. The new file will open in the center pane. Copy and paste the following Python code and save the changes.
+
+Inspecting the `regulatory_reporting_tools.py` code, you will find two python functions named `report_generator_tool` and `audit_log_search_tool`. These function are annoted with the `@tool()` annotation which marks them as tools for agents to use.
+
+```python
+from ibm_watsonx_orchestrate.agent_builder.tools import tool
+
+# Mock compliance reports keyed by type
+mock_reports = {
+    "cust001": {
+        "report_id": "REP2001",
+        "report_type": "Suspicious Activity Report (SAR)",
+        "customer_id": "cust001",
+        "summary": "Large late-night cash transactions and high-value chip purchases inconsistent with profile.",
+        "status": "Draft"
+    },
+    "cust002": {
+        "report_id": "REP2002",
+        "report_type": "Suspicious Activity Report (SAR)",
+        "customer_id": "cust002",
+        "summary": "Frequent chip redemptions and large transfers flagged for AML review.",
+        "status": "Draft"
+    },
+    "cust003": {
+        "report_id": "REP2003",
+        "report_type": "Audit Summary Report",
+        "customer_id": "cust003",
+        "summary": "Medium risk activity with occasional spikes. No SAR required but monitoring ongoing.",
+        "status": "Completed"
+    },
+    "cust004": {
+        "report_id": "REP2004",
+        "report_type": "Audit Summary Report",
+        "customer_id": "cust004",
+        "summary": "Low-risk transactions. No anomalies detected this period.",
+        "status": "Completed"
+    },
+    "cust005": {
+        "report_id": "REP2005",
+        "report_type": "Routine Compliance Report",
+        "customer_id": "cust005",
+        "summary": "Minimal activity, no suspicious indicators. No SAR required.",
+        "status": "Completed"
+    }
+}
+
+@tool()
+def report_generator_tool(customer_id: str) -> str:
+    """
+    Returns a formatted table with the compliance or SAR report for the given customer_id.
+    """
+    key = customer_id.lower()
+    report = mock_reports.get(
+        key,
+        {
+            "report_id": "REP9999",
+            "report_type": "Routine Compliance Report",
+            "customer_id": customer_id,
+            "summary": "Customer not in database; no suspicious activity detected.",
+            "status": "Completed"
+        }
+    )
+
+    lines = [
+        "| Report ID | Type                         | Customer | Status    | Summary |",
+        "|-----------|------------------------------|----------|-----------|---------|",
+        f"| {report['report_id']} | {report['report_type']} | {report['customer_id']} | {report['status']} | {report['summary']} |"
+    ]
+    return "\n".join(lines)
+
+
+mock_audit_logs = {
+    "cust001": [
+        {"timestamp": "2025-07-30", "event": "SAR draft generated"},
+        {"timestamp": "2025-07-29", "event": "High-value transaction flagged"},
+        {"timestamp": "2025-07-27", "event": "Pattern anomaly detected"}
+    ],
+    "cust002": [
+        {"timestamp": "2025-07-28", "event": "Chip redemption flagged"},
+        {"timestamp": "2025-07-27", "event": "AML check performed"}
+    ],
+    "cust003": [
+        {"timestamp": "2025-07-25", "event": "Transaction review completed"},
+        {"timestamp": "2025-07-24", "event": "No anomalies detected"}
+    ],
+    "cust004": [
+        {"timestamp": "2025-07-22", "event": "Low-risk customer — minimal activity"},
+        {"timestamp": "2025-07-20", "event": "Routine KYC check"}
+    ],
+    "cust005": [
+        {"timestamp": "2025-07-19", "event": "Gift shop spend logged"},
+        {"timestamp": "2025-07-18", "event": "No suspicious activity"}
+    ]
+}
+
+@tool()
+def audit_log_search_tool(customer_id: str) -> str:
+    """
+    Returns a formatted table of audit log entries for the specified customer ID.
+    """
+    logs = mock_audit_logs.get(customer_id, [])
+    if not logs:
+        return f"No audit logs found for {customer_id}"
+
+    lines = [
+        "| Timestamp  | Event                          |",
+        "|------------|-------------------------------|"
+    ]
+    for entry in logs:
+        line = f"| {entry['timestamp']} | {entry['event']} |"
+        lines.append(line)
+
+    return "\n".join(lines)
+```
+
+![regulatory_reporting_tools](images/regulatory_reporting_tools.png)
+
+### 2. Open new Terminal window within VSCode
+
+On the top menu bar in VSCode, expand the `Terminal` menu and select `New Terminal`. A new terminal pane will open on at the bottom of the center pane.
+
+![new terminal](images/new-terminal.png)
+
+### 3. Validate the Tool Python Code
+
+Execute the following command to verify the python code has no syntax errors. There should be no output which means no syntax errors were found.
+
+```bash
+python tools/regulatory_reporting_tools.py
+```
+
+![validate python code](images/validate-python-code.png)
+
+### 4. Import the Tools into watsonx Orchestrate
+
+In the terminal window, execute the following command to import the new Regulatory Reporting Tools into the locally running wxOrchestrate development environment.
+
+```bash
+orchestrate tools import -k python -f tools/regulatory_reporting_tools.py -r requirements.txt
+```
+
+Where:
+```
+-k python: Specifies it's a Python tool
+-f: The path to your .py file that contains the @tool function
+-r: The path to your requirements.txt file listing dependencies
+```
+
+![import tool](images/import-tool.png)
+
+### 5. Verify Tools were Imported
+
+Execute the following command in the terminal to see all available tools in your wxOrchestrate environment.
+
+```bash
+orchestrate tools list
+```
+
+You should see both `report_generator_tool` and `audit_log_search_tool` listed.
+
+![verify tools](images/verify-tools-list.png)
+
+### 6. Create Your Agent YAML File
+
+On the left pane in VSCode, right click on the `agents` folder and select `New File...`. Name the new file `regulator_reporting_agent.yaml`. The new file will open in the center pane.
+
+Copy and paste the following YAML code into the file and save the changes.
+
+```yaml
+spec_version: v1
+style: default
+name: regulatory_reporting_agent
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+description: >
+  A regulatory reporting assistant designed to help compliance officers generate reports
+  and review audit logs for compliance oversight.
+
+instructions: >
+  - When asked to generate a regulatory report for a customer (e.g., "Create a report for customer cust001"),
+    use only the `report_generator_tool` to list the structured report and provide a compliance-focused summary.
+  - Do not ask the user to specify report types; the tool determines whether the report is a SAR, Audit, or Routine Compliance Report.
+  - When asked to review or cross-check past activities (e.g., "Show audit log for March 2025"),
+    call only the `audit_log_search_tool` to list the extracted relevant log entries with timestamps and compliance context.
+  - Use clear, compliance-focused, and concise language for all responses.
+  - If an unknown or invalid customer ID is provided, inform the user politely and return a default "no suspicious activity" response.
+
+tools:
+  - report_generator_tool
+  - audit_log_search_tool
+
+chat_with_docs:
+  enabled: false
+```
+
+![regulatory reporting agent](images/regulatory_reporting_agent.png)
+
+### 7. Import the Agent
+
+In the terminal, execute the following command to import the new regulatory_reporting_agent to the locally running wxOrchestrate development environment.
+
+```bash
+orchestrate agents import -f agents/regulatory_reporting_agent.yaml
+```
+
+![import agent](images/agent-import.png)
+
+### 8. Verify Agent was Imported
+
+Execute the following command in the terminal to see all available agents in your wxOrchestrate environment.
+
+```bash
+orchestrate agents list
+```
+
+You should see the `regulatory_reporting_agent` listed.
+
+![verify tools](images/verify-agents-list.png)
+
+### 9. Test Your Custom Tools and Agent
+
+Before importing the full solution, test your custom regulatory agent.
+
+---
+
+### **Step A: Access Agent through Agent Builder**
+1. Open your **Watsonx Orchestrate** web interface by executing the following command in the terminal
+    ```
+    orchestrate chat start
+    ```
+    You can maximaze the browser window that opens up to view the interface better.
+2. Click on **Manage agents** at the bottom left of the page
+    ![manage agents](images/manage-agents.png)
+3. Select your `regulatory_reporting_agent` tile
+    ![open agent](images/open-agent.png)
+
+---
+
+### **Step B: Test Your Custom Agent**
+
+Try these test queries in the preview chat:
+
+**Test Query 1:**
+```
+Generate a compliance report for customer cust001
+```
+
+**Test Query 2:**
+```
+Show me the audit log for customer cust002
+```
+
+**Test Query 3:**
+```
+Create a report for customer cust003
+```
+
+**Expected Results:**
+- Agent should call `report_generator_tool` for report requests
+- Agent should call `audit_log_search_tool` for audit requests  
+- Responses should show formatted compliance tables
+- Language should be professional and compliance-focused
+
+Your test interface should look similar to this:
+
+![tests](images/test-agent.png)
+
+You can expand each response's reasoning to verify the proper tools are being called.
+
+![reasoning](images/agent-reasoning.png)
+
+If everything works as expected, proceed to import the full solution.
+
+
+## Import Full Solution
+
+### Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
+
+### Import Additional Tools and Agents
+
+You will now import the following tools:
+
+* tools/risk_analysis_tools.py
+  * risk_profile_summary_tool
+  * recent_transaction_review_tool
+  * transaction_pattern_analysis_tool
+* tools/kyc_application_tools.py
+  * list_pending_kyc_applications_tool
+  * start_loan_application_review_tool
+  * kyc_requirements_summary_tool
+  * high_risk_trigger_explanation_tool
+
+Execute the following two commands from the terminal in VSCode.
+
+```bash
+orchestrate tools import -k python -f tools/risk_analysis_tools.py -r requirements.txt
+orchestrate tools import -k python -f tools/kyc_application_tools.py -r requirements.txt
+```
+
+Where:
+- `-k python`: Specifies it's a Python tool
+- `-f`: The path to your .py file that contains the @tool function
+- `-r`: The path to your requirements.txt file listing dependencies
+
+![Picture](images/import-remaining-tools.png)
+
+You will now import the following agents:
+
+* customer_risk_analysis_agent
+* kyc_loan_application_review_agent
+* compliance_super_agent
+
+Execute the following three commands from the terminal in VSCode.
+
+```bash
+orchestrate agents import -f agents/customer_risk_profile.yaml
+orchestrate agents import -f agents/kyc_status.yaml
+orchestrate agents import -f agents/compliance_super_agent.yaml
+```
+
+![Picture](images/import-remaining-agents.png)
+
+
+### Verify Complete Import
+
+Verify that all tools and agents have been imported successfully.
+Execute the following to commands to list all tools and agents listed in your wxOrchestrate environment:
+
+```bash
+orchestrate tools list
+orchestrate agents list
+```
+
+![all tools](images/all-tools-list.png)
+![all agents](images/all-agents-list.png)
+
+
+You should see at minimum (you may see more pre-existing tools and agents which you did not import):
+- **9 total tools** (including your 2 custom tools)
+- **4 total agents** (including your custom regulatory agent)
+
+## 10\. Now Lets Test the Complete KYC Solution
+
+### First Lets Understand the Agent Architecture
+
+**How the Super Agent Routes Queries:**
+- KYC application queries → `kyc_loan_application_review_agent`  
+- Risk/transaction queries → `customer_risk_analysis_agent`
+- Report/audit queries → `regulatory_reporting_agent`
+
+**Each specialist agent has specific tools:**
+- **KYC Agent:** application listing, review, requirements, risk triggers
+- **Risk Agent:** risk profiling, transaction analysis, pattern detection  
+- **Regulatory Agent:** compliance reports, audit log search
+
+**The super agent acts as an intelligent dispatcher** - it never uses tools directly, only routes to agents based on query who then uses their tools.
+
+
+## 11\. How to Test Your Compliance Super Agent in the Watsonx Orchestrate UI 
+
+Once your agents are imported and deployed, you can test them using the built-in chat interface:
+
+1. Open the wxOrchestrate web interface by executing the following command in the VSCode terminal:
+    ```
+    orchestrate chat start
+    ```
+2. Click on `Manage agents` at the bottom left of the page
+
+    ![Picture](images/manage-agents.png)
+
+3. From the _Agent_ section, select **compliance\_super\_agent** to open its builder workspace.
+
+    ![Picture](images/compliance-super-agent.png)
+
+### Test These Queries in Sequence
+
+Test these queries in the preview chat and observe the routing behavior:
+
+1. `Show me the pending KYC applications for review`
+    - *Expected: Routes to KYC agent, shows application table*
+
+2. `Start review for Ryan Hogan's application`
+    - *Expected: Shows Ryan Hogan's details (Ireland, High risk)*
+
+3. `Show the KYC requirements summary for this customer`
+    - *Expected: Shows High risk KYC requirements*
+
+4. `Why is the risk level of this customer high?`
+    - *Expected: Lists risk triggers for Ryan Hogan*
+
+5. `Show the risk profile summary for customer id - cust001`
+    - *Expected: Routes to risk analysis agent, shows risk profile*
+
+6. `Review the recent transactions for this customer`
+    - *Expected: Shows transaction analysis with risk flags*
+
+### What to Observe
+
+- **Intelligent Routing:** Super agent correctly routes each query to the appropriate specialist
+- **Tool Invocation:** Each specialist calls their specific tools
+- **Professional Responses:** Compliance-focused, well-formatted answers
+- **Context Maintenance:** Related queries maintain context within workflows
+
+    ![Picture](images/test-compliance-super-agent.png)
+
+    ![Picture](images/test-compliance-super-agent-2.png)
+
+## 7\. Now Lets test the Compliance Super Agent in the Agent Chat
+
+Because this is a locally running watsonx Orchestrate development environment, agents are automatically deployed to the Agent Chat interface. You will notice the **Deploy** button on the upper right corner is greyed out inidating it is inactive and un-clickable. In a SaaS or on-prem wxOrchestrate environment, you would need to click this **Deploy** button for changes to be deployed in order for other users to be able to interact with the agent.
+
+<!-- 1.  Once you have validated the answers, click on Deploy in the top right corner to deploy your agent:
+
+![Picture](images/Picture15.png)
+
+1.  Click on the hamburger menu in the top left corner and then click on Chat:
+
+![Picture](images/Picture17.png)
+2.  Make sure Compliance Super Agent is selected. You are now ready to test your agent:
+
+![Picture](images/Picture16.png) -->
+
+Navigate to the Agent Chat page by clicking on the blue **Agent chat** link on in the navigation on the upper left of the page.
+
+![agent chat](images/back-to-agent-chat.png)
+
+# 🎉 Congratulations! You have completed the lab!
+
+Now that you have successfully imported and tested the complete KYC solution, try creating your own tools to extend the capabilities. Follow the same **ADK tool creation process** you used earlier, using the given tools as a reference for structure, annotations, and requirements.
+
+# Takehome References
+## Practice Lab: Create and Experiment with Your Own Tools
+
+Here are some example tool ideas you can implement for practice:
+
+* **risk_score_trend_tool** – Analyze how a customer's risk score changes over time
+* **suspicious_location_check_tool** – Flag transactions originating from unusual or high-risk locations
+* **fraud_alert_check_tool** – Scan for recent fraud alerts linked to a customer
+* **gaming_industry_risk_assessment_tool** – Evaluate compliance risk for customers operating in the gaming sector
+* **customer_activity_timeline_tool** – Generate a chronological view of a customer's activities
+* **multi_account_detection_tool** – Detect if a single customer is linked to multiple accounts
+
+## **Deployment of Local Instance of WxO**
+
+### If you want to run a local instance of Watsonx Orchestrate Developer Edition on your own laptop (instead of relying on the cloud-hosted TechZone environment), you will need to install and configure Docker
+
+### A Docker Engine
+
+Ensure that you have a docker engine installed capable of running docker compose. The watsonx Orchestrate team recommend either Rancher or Colima.
+
+Please make sure your instance of Rancher or Colima is configured with the following settings:
+
+
+*   **For Colima settings**
+
+**M Series Mac**
+
+```python
+colima start --cpu-type host --arch host --vm-type=vz --mount-type
+virtiofs -c 8 -m 16
+```
+
+**Intel Mac**
+
+```python
+colima start --cpu-type host --arch host --vm-type=vz --vz-rosetta -
+\-mount-type virtiofs -c 8 -m 16
+```
+
+*   **Rancher Settings**
+
+If you prefer Rancher Desktop:
+
+1.  Install Rancher from [rancherdesktop.io](https://rancherdesktop.io/)
+2.  Enable Docker support in the settings
+3.  Allocate at least 8 CPUs and 16GB RAM in the Rancher VM configuration
+4.  Confirm Docker is working:
+
+docker --version
+
+docker compose version
+
+#### Verify Docker Is Working
+
+Once Colima or Rancher is running, verify Docker:
+
+docker version
+
+docker compose version
+
+You should see version details without errors.
+
+## Wrapping Up & Next Steps
+
+By now, you've successfully:
+- Installed the ADK and configured your environment
+- Created and tested your own custom tools and agents
+- Imported and tested the complete KYC automation solution
+- Understood how intelligent agent collaboration works
+- Explored the potential for extending the solution
+
+Your next steps:
+- Continue experimenting with additional custom tools
+- Combine your new tools into extended agents for richer automation
+- Explore other use cases where agentic AI can provide business value
+
+## 📚 Resources
+
+For more information on Watsonx Orchestrate and Agentic AI:
+- [Watsonx Orchestrate Documentation](https://www.ibm.com/products/watsonx-orchestrate)
+- [IBM Agentic AI Guide](https://www.ibm.com/think/ai-agents)
+- [Banking Industry AI Transformation](https://www.ibm.com/industries/banking-financial-markets)
+
+
+
+
+EXTRAS
+
+Template structure for standerdization
+
+``` yaml
+
+spec_version: v1
+style: default
+name: [business_domain]_[function]_agent
+llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
+description: >
+  [TEMPLATE - Replace with your content]
+  A [ROLE/PURPOSE] assistant designed to help [TARGET_USERS] with [PRIMARY_FUNCTIONS].
+  Specializes in [DOMAIN_EXPERTISE] for [BUSINESS_CONTEXT].
+
+instructions: >
+  [TEMPLATE - Replace with your content]
+  BEHAVIOR GUIDELINES:
+  - When [TRIGGER_CONDITION], use [SPECIFIC_TOOL] to [EXPECTED_ACTION]
+  - When [TRIGGER_CONDITION], call [SPECIFIC_TOOL] to [EXPECTED_ACTION]
+  - [Continue pattern for each major workflow]
+  
+  RESPONSE STANDARDS:
+  - Use [TONE/STYLE] language for all responses
+  - If [ERROR_CONDITION], inform the user [HOW_TO_HANDLE]
+  - [Additional response guidelines]
+
+tools:
+  - [tool_name_1]
+  - [tool_name_2]
+
+chat_with_docs:
+  enabled: [true/false]
+
+collaborators: # Only for super/coordinator agents
+  - [sub_agent_name_1]
+  - [sub_agent_name_2]
+  ```
+
+## Apendix
+
 ## Before You Begin
 
 Before proceeding, ensure the following requirements are met:
@@ -107,11 +689,10 @@ Before proceeding, ensure the following requirements are met:
 **Check version:**
 
 ```bash
-python3 --version
+python --version
 ```
 
 ![Picture](images/Picture2.png)
-
 
 # From ADK Installation to Agent Testing: Step-by-Step Setup Guide
 
@@ -253,506 +834,3 @@ Replace `<environment-name>` with the name you used earlier when adding the envi
 orchestrate tools list
 orchestrate agents list
 ```
-
-## 4\. Clone the Repository and Retrieve the Code
-Once your virtual environment is active and your environment is configured, clone the bootcamp repository to get the required tools and agent files:
-```bash
-git clone https://github.com/esantan-ibm/agentic-ai-bootcamp.git
-cd customer-risk-summary
-```
-
-## Create Your Own Tool and Agent (Mandatory Student Exercise)
-
-Now that you've cloned the repository, you will create your own tool called **regulatory_reporting_tools**, and agent called **regulatory_reporting_agent** before importing the default ones. This will give you hands-on experience building from scratch.
-
-### 1. Create Your Own Tool File
-
-Navigate to the tools directory:
-```bash
-cd tools
-touch regulatory_reporting_tools.py
-```
-
-### 2. Add Tool Content
-
-Open `regulatory_reporting_tools.py` and paste the following content:
-
-```python
-from ibm_watsonx_orchestrate.agent_builder.tools import tool
-
-# Mock compliance reports keyed by type
-mock_reports = {
-    "cust001": {
-        "report_id": "REP2001",
-        "report_type": "Suspicious Activity Report (SAR)",
-        "customer_id": "cust001",
-        "summary": "Large late-night cash transactions and high-value chip purchases inconsistent with profile.",
-        "status": "Draft"
-    },
-    "cust002": {
-        "report_id": "REP2002",
-        "report_type": "Suspicious Activity Report (SAR)",
-        "customer_id": "cust002",
-        "summary": "Frequent chip redemptions and large transfers flagged for AML review.",
-        "status": "Draft"
-    },
-    "cust003": {
-        "report_id": "REP2003",
-        "report_type": "Audit Summary Report",
-        "customer_id": "cust003",
-        "summary": "Medium risk activity with occasional spikes. No SAR required but monitoring ongoing.",
-        "status": "Completed"
-    },
-    "cust004": {
-        "report_id": "REP2004",
-        "report_type": "Audit Summary Report",
-        "customer_id": "cust004",
-        "summary": "Low-risk transactions. No anomalies detected this period.",
-        "status": "Completed"
-    },
-    "cust005": {
-        "report_id": "REP2005",
-        "report_type": "Routine Compliance Report",
-        "customer_id": "cust005",
-        "summary": "Minimal activity, no suspicious indicators. No SAR required.",
-        "status": "Completed"
-    }
-}
-
-@tool()
-def report_generator_tool(customer_id: str) -> str:
-    """
-    Returns a formatted table with the compliance or SAR report for the given customer_id.
-    """
-    key = customer_id.lower()
-    report = mock_reports.get(
-        key,
-        {
-            "report_id": "REP9999",
-            "report_type": "Routine Compliance Report",
-            "customer_id": customer_id,
-            "summary": "Customer not in database; no suspicious activity detected.",
-            "status": "Completed"
-        }
-    )
-
-    lines = [
-        "| Report ID | Type                         | Customer | Status    | Summary |",
-        "|-----------|------------------------------|----------|-----------|---------|",
-        f"| {report['report_id']} | {report['report_type']} | {report['customer_id']} | {report['status']} | {report['summary']} |"
-    ]
-    return "\n".join(lines)
-
-
-mock_audit_logs = {
-    "cust001": [
-        {"timestamp": "2025-07-30", "event": "SAR draft generated"},
-        {"timestamp": "2025-07-29", "event": "High-value transaction flagged"},
-        {"timestamp": "2025-07-27", "event": "Pattern anomaly detected"}
-    ],
-    "cust002": [
-        {"timestamp": "2025-07-28", "event": "Chip redemption flagged"},
-        {"timestamp": "2025-07-27", "event": "AML check performed"}
-    ],
-    "cust003": [
-        {"timestamp": "2025-07-25", "event": "Transaction review completed"},
-        {"timestamp": "2025-07-24", "event": "No anomalies detected"}
-    ],
-    "cust004": [
-        {"timestamp": "2025-07-22", "event": "Low-risk customer — minimal activity"},
-        {"timestamp": "2025-07-20", "event": "Routine KYC check"}
-    ],
-    "cust005": [
-        {"timestamp": "2025-07-19", "event": "Gift shop spend logged"},
-        {"timestamp": "2025-07-18", "event": "No suspicious activity"}
-    ]
-}
-
-@tool()
-def audit_log_search_tool(customer_id: str) -> str:
-    """
-    Returns a formatted table of audit log entries for the specified customer ID.
-    """
-    logs = mock_audit_logs.get(customer_id, [])
-    if not logs:
-        return f"No audit logs found for {customer_id}"
-
-    lines = [
-        "| Timestamp  | Event                          |",
-        "|------------|-------------------------------|"
-    ]
-    for entry in logs:
-        line = f"| {entry['timestamp']} | {entry['event']} |"
-        lines.append(line)
-
-    return "\n".join(lines)
-```
-
-
-
-### 3. Test the Tool Locally
-
-```bash
-python tools/regulatory_reporting_tools.py
-```
-
-There should be no output - that means no syntax errors.
-
-### 4. Import the Tool into Watsonx Orchestrate
-
-```bash
-orchestrate tools import \
-  -k python \
-  -f tools/regulatory_reporting_tools.py \
-  -r requirements.txt
-```
-
-### 5. Verify Tool Is Registered
-
-```bash
-orchestrate tools list
-```
-
-You should see both `report_generator_tool` and `audit_log_search_tool` listed.
-
-### 6. Create Your Agent YAML File
-
-Navigate to the agents directory:
-```bash
-cd ../agents
-touch regulatory_reporting_agent.yaml
-```
-
-Add the below content to `regulatory_reporting_agent.yaml`:
-
-```yaml
-spec_version: v1
-style: default
-name: regulatory_reporting_agent
-llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
-description: >
-  A regulatory reporting assistant designed to help compliance officers generate reports
-  and review audit logs for compliance oversight.
-
-instructions: >
-  - When asked to generate a regulatory report for a customer (e.g., "Create a report for customer cust001"),
-    use only the `report_generator_tool` to list the structured report and provide a compliance-focused summary.
-  - Do not ask the user to specify report types; the tool determines whether the report is a SAR, Audit, or Routine Compliance Report.
-  - When asked to review or cross-check past activities (e.g., "Show audit log for March 2025"),
-    call only the `audit_log_search_tool` to list the extracted relevant log entries with timestamps and compliance context.
-  - Use clear, compliance-focused, and concise language for all responses.
-  - If an unknown or invalid customer ID is provided, inform the user politely and return a default "no suspicious activity" response.
-
-tools:
-  - report_generator_tool
-  - audit_log_search_tool
-
-chat_with_docs:
-  enabled: false
-```
-
-
-### 7. Import the Agent
-
-```bash
-orchestrate agents import -f agents/regulatory_reporting_agent.yaml
-```
-
-### 8. Test Your Custom Tools and Agent
-
-Before importing the full solution, test your custom regulatory agent.
-
----
-
-### **Step A: Access Agent Builder**
-1. Open your **Watsonx Orchestrate** web interface  
-2. Go to: **☰ Menu → Build → Agent builder**  
-3. Select: **`regulatory_reporting_agent`**
-
-
-![Picture](images/Screenshot592.png) 
-
----
-
-### **Step B: Test Your Custom Agent**
-
-Try these test queries in the preview chat:
-
-**Test Query 1:**
-```
-Generate a compliance report for customer cust001
-```
-
-**Test Query 2:**
-```
-Show me the audit log for customer cust002
-```
-
-**Test Query 3:**
-```
-Create a report for customer cust003
-```
-
-**Expected Results:**
-- Agent should call `report_generator_tool` for report requests
-- Agent should call `audit_log_search_tool` for audit requests  
-- Responses should show formatted compliance tables
-- Language should be professional and compliance-focused
-
-Your test interface should look similar to this:
-
-
-![Picture](images/Screenshot1.png)
-
-If everything works as expected, proceed to import the full solution.
-
-
-
-### Now that you've successfully created and tested your own tool and agent, let's import the complete KYC automation solution with all remaining tools and agents.
-
-### Import Additional Tools and Agents
-
-Import the remaining Python tools:
-```bash
-orchestrate tools import -k python -f tools/risk_analysis_tools.py -r requirements.txt
-orchestrate tools import -k python -f tools/kyc_application_tools.py -r requirements.txt
-```
-
-Where:
-- `-k python`: Specifies it's a Python tool
-- `-f`: The path to your .py file that contains the @tool function
-- `-r`: The path to your requirements.txt file listing dependencies
-
-![Picture](images/Picture8.png)
-
-Import the remaining YAML agent configurations:
-```bash
-orchestrate agents import -f agents/customer_risk_profile.yaml
-orchestrate agents import -f agents/kyc_status.yaml
-orchestrate agents import -f agents/compliance_super_agent.yaml
-```
-
-
-![Picture](images/Picture9.png)
-
-
-### Verify Complete Import
-
-Check that everything imported successfully:
-```bash
-orchestrate tools list
-orchestrate agents list
-```
-
-
-You should see:
-- **9 total tools** (including your 2 custom tools)
-- **4 total agents** (including your custom regulatory agent)
-
-## 5\. Now Lets Test the Complete KYC Solution
-
-### First Lets Understand the Agent Architecture
-
-**How the Super Agent Routes Queries:**
-- KYC application queries → `kyc_loan_application_review_agent`  
-- Risk/transaction queries → `customer_risk_analysis_agent`
-- Report/audit queries → `regulatory_reporting_agent`
-
-**Each specialist agent has specific tools:**
-- **KYC Agent:** application listing, review, requirements, risk triggers
-- **Risk Agent:** risk profiling, transaction analysis, pattern detection  
-- **Regulatory Agent:** compliance reports, audit log search
-
-**The super agent acts as an intelligent dispatcher** - it never uses tools directly, only routes to agents based on query who then uses their tools.
-
-
-## 6\. How to Test Your Compliance Super Agent in the Watsonx Orchestrate UI 
-
-Once your agents are imported and deployed, you can test them using the built-in chat interface:
-
-1.  Log into **watsonx Orchestrate** via the web interface.
-2.  Click the “hamburger” menu (☰) in the UI navigation bar, then select **Build → Agent builder**.
-
-![Picture](images/Picture11.png)
-
-3.  From the _Agent_ section, select **compliance\_super\_agent** to open its builder workspace.
-
-![Picture](images/Picture12.png)
-
-### Test These Queries in Sequence
-
-Test these queries in the preview chat and observe the routing behavior:
-
-**1. "Show me the pending KYC applications for review"**
-- *Expected: Routes to KYC agent, shows application table*
-
-**2. "Start review for Ryan Hogan's application"**  
-- *Expected: Shows Ryan Hogan's details (Ireland, High risk)*
-
-**3. "Show the KYC requirements summary for this customer"**
-- *Expected: Shows High risk KYC requirements*
-
-**4. "Why is the risk level of this customer high?"**
-- *Expected: Lists risk triggers for Ryan Hogan*
-
-**5. "Show the risk profile summary for customer id - cust001"**
-- *Expected: Routes to risk analysis agent, shows risk profile*
-
-**6. "Review the recent transactions for this customer"**
-- *Expected: Shows transaction analysis with risk flags*
-
-### What to Observe
-
-- **Intelligent Routing:** Super agent correctly routes each query to the appropriate specialist
-- **Tool Invocation:** Each specialist calls their specific tools
-- **Professional Responses:** Compliance-focused, well-formatted answers
-- **Context Maintenance:** Related queries maintain context within workflows
-
-![Picture](images/picture13.png)
-
-![Picture](images/Picture14.png
-)
-
-## 7\. Now Lets Deploy the Agent
-
-1.  Once you have validated the answers, click on Deploy in the top right corner to deploy your agent:
-
-![Picture](images/Picture15.png)
-
-1.  Click on the hamburger menu in the top left corner and then click on Chat:
-
-![Picture](images/Picture17.png)
-2.  Make sure Compliance Super Agent is selected. You are now ready to test your agent:
-
-![Picture](images/Picture16.png)
-
-
-
-# 🎉 Congratulations! You have completed the lab!
-
-Now that you have successfully imported and tested the complete KYC solution, try creating your own tools to extend the capabilities. Follow the same **ADK tool creation process** you used earlier, using the given tools as a reference for structure, annotations, and requirements.
-
-# Takehome References
-## Practice Lab: Create and Experiment with Your Own Tools
-
-Here are some example tool ideas you can implement for practice:
-
-* **risk_score_trend_tool** – Analyze how a customer's risk score changes over time
-* **suspicious_location_check_tool** – Flag transactions originating from unusual or high-risk locations
-* **fraud_alert_check_tool** – Scan for recent fraud alerts linked to a customer
-* **gaming_industry_risk_assessment_tool** – Evaluate compliance risk for customers operating in the gaming sector
-* **customer_activity_timeline_tool** – Generate a chronological view of a customer's activities
-* **multi_account_detection_tool** – Detect if a single customer is linked to multiple accounts
-
-## **Deployment of Local Instance of WxO**
-
-### If you want to run a local instance of Watsonx Orchestrate Developer Edition on your own laptop (instead of relying on the cloud-hosted TechZone environment), you will need to install and configure Docker
-
-### A Docker Engine
-
-Ensure that you have a docker engine installed capable of running docker compose. The watsonx Orchestrate team recommend either Rancher or Colima.
-
-Please make sure your instance of Rancher or Colima is configured with the following settings:
-
-
-*   **For Colima settings**
-
-**M Series Mac**
-
-```python
-colima start --cpu-type host --arch host --vm-type=vz --mount-type
-virtiofs -c 8 -m 16
-```
-
-**Intel Mac**
-
-```python
-colima start --cpu-type host --arch host --vm-type=vz --vz-rosetta -
-\-mount-type virtiofs -c 8 -m 16
-```
-
-*   **Rancher Settings**
-
-If you prefer Rancher Desktop:
-
-1.  Install Rancher from [rancherdesktop.io](https://rancherdesktop.io/)
-2.  Enable Docker support in the settings
-3.  Allocate at least 8 CPUs and 16GB RAM in the Rancher VM configuration
-4.  Confirm Docker is working:
-
-docker --version
-
-docker compose version
-
-#### Verify Docker Is Working
-
-Once Colima or Rancher is running, verify Docker:
-
-docker version
-
-docker compose version
-
-You should see version details without errors.
-
-## Wrapping Up & Next Steps
-
-By now, you've successfully:
-- Installed the ADK and configured your environment
-- Created and tested your own custom tools and agents
-- Imported and tested the complete KYC automation solution
-- Understood how intelligent agent collaboration works
-- Explored the potential for extending the solution
-
-Your next steps:
-- Continue experimenting with additional custom tools
-- Combine your new tools into extended agents for richer automation
-- Explore other use cases where agentic AI can provide business value
-
-## 📚 Resources
-
-For more information on Watsonx Orchestrate and Agentic AI:
-- [Watsonx Orchestrate Documentation](https://www.ibm.com/products/watsonx-orchestrate)
-- [IBM Agentic AI Guide](https://www.ibm.com/think/ai-agents)
-- [Banking Industry AI Transformation](https://www.ibm.com/industries/banking-financial-markets)
-
-
-
-
-EXTRAS
-
-Template structure for standerdization
-
-``` yaml
-
-spec_version: v1
-style: default
-name: [business_domain]_[function]_agent
-llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
-description: >
-  [TEMPLATE - Replace with your content]
-  A [ROLE/PURPOSE] assistant designed to help [TARGET_USERS] with [PRIMARY_FUNCTIONS].
-  Specializes in [DOMAIN_EXPERTISE] for [BUSINESS_CONTEXT].
-
-instructions: >
-  [TEMPLATE - Replace with your content]
-  BEHAVIOR GUIDELINES:
-  - When [TRIGGER_CONDITION], use [SPECIFIC_TOOL] to [EXPECTED_ACTION]
-  - When [TRIGGER_CONDITION], call [SPECIFIC_TOOL] to [EXPECTED_ACTION]
-  - [Continue pattern for each major workflow]
-  
-  RESPONSE STANDARDS:
-  - Use [TONE/STYLE] language for all responses
-  - If [ERROR_CONDITION], inform the user [HOW_TO_HANDLE]
-  - [Additional response guidelines]
-
-tools:
-  - [tool_name_1]
-  - [tool_name_2]
-
-chat_with_docs:
-  enabled: [true/false]
-
-collaborators: # Only for super/coordinator agents
-  - [sub_agent_name_1]
-  - [sub_agent_name_2]
-  ```
