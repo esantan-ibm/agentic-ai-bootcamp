@@ -1,6 +1,6 @@
-# Transforming Banking with Intelligent Agents - Lab <!-- omit in toc -->
+# Transforming Banking with Intelligent Agents - Lab `<!-- omit in toc -->`
 
-## Table of contents <!-- omit in toc -->
+## Table of contents `<!-- omit in toc -->`
 
 - [🔍 Introduction](#introduction)
 - [📊 Banking Operations](#-banking-operations)
@@ -50,10 +50,11 @@ In this lab, you'll build a system of collaborating AI agents that can handle ba
 
 ## 📊 Banking Operations
 
-*Currently, GFM Bank relies on human tellers for basic transactions and back-office staff for approvals, leading to delays and inconsistent customer experiences in peak season.*
+_Currently, GFM Bank relies on human tellers for basic transactions and back-office staff for approvals, leading to delays and inconsistent customer experiences in peak season._
 
 ### Current User Scenario
-John, a GFM Bank customer, needs to make an urgent payment of €8,000, but he only has €5,000 in his account. 
+
+John, a GFM Bank customer, needs to make an urgent payment of €8,000, but he only has €5,000 in his account.
 
 1. John visits the bank branch and waits in line to speak with a teller
 2. The teller checks his balance and informs him he has insufficient funds
@@ -66,6 +67,7 @@ John, a GFM Bank customer, needs to make an urgent payment of €8,000, but he o
 This process typically takes 1-2 hours of John's time and involves multiple staff members.
 
 ### Future with Agentic AI
+
 With the AI-powered system you'll build today:
 
 1. John messages the GFM Bank Orchestrator Agent
@@ -87,6 +89,7 @@ The entire process takes minutes instead of hours, and John never has to leave h
 In this lab, you'll build a complete Agentic AI solution for GFM Bank using watsonx Orchestrate. You'll create multiple specialized agents that work together to handle customer requests.
 
 ### Prerequisites
+
 - Check with your instructor to ensure all systems are up and running before you continue
 - Validate that you have access to the right TechZone environment for this lab
 - Validate that you have access to a credentials file that your instructor will share with you before starting the labs
@@ -97,19 +100,18 @@ In this lab, you'll build a complete Agentic AI solution for GFM Bank using wats
 ### Lab Steps Overview
 
 1. Connect to **watsonx Orchestrate**
-1. Create the GFM Back Office Agent
-1. Create the GFM Teller Agent
-1. Create the GFM Product Information Agent
-1. Create the GFM Bank Orchestrator Agent
-1. Test the complete solution
+2. Create the GFM Back Office Agent
+3. Create the GFM Teller Agent
+4. Create the GFM Product Information Agent
+5. Create the GFM Bank Orchestrator Agent
+6. Test the complete solution
 
-### 🚀🚀🚀 Let's get started! 🚀🚀🚀 <!-- omit in toc -->
+### 🚀🚀🚀 Let's get started! 🚀🚀🚀 `<!-- omit in toc -->`
 
 ### Connect to your assigned Watsonx Orchestrate instance
 
 - Log in to IBM Cloud (cloud.ibm.com). Make sure you are connected to the bootcamp account as illustrated below. You should have received an email with the account name.
   ![Account selection](./assets/images/i0.png)
-
 - Navigate to the top-left hamburger menu, then to the Resource List. Open the AI/Machine Learning section. You should see a **watsonx Orchestrate** service, click to open
 
   ![Watsonx Orchestrate service](./assets/images/i1.png)
@@ -124,7 +126,7 @@ In this lab, you'll build a complete Agentic AI solution for GFM Bank using wats
 
 ### IBAN Number assignments
 
-Throught this lab, you will be using IBAN numbers which correlate to fictional account numbers for you to transfer funds to and from. Go to the following document and locate your name. You will have two accounts assigned to you. Use those IBAN numbers when talking to the AI Agents in testing your agents. Your choice to choose which of the two IBAN numbers you wish to use for the to account and for the from account. (*Right click and open in a new tab or browser so that you do not lose your place in the instructions*)
+Throught this lab, you will be using IBAN numbers which correlate to fictional account numbers for you to transfer funds to and from. Go to the following document and locate your name. You will have two accounts assigned to you. Use those IBAN numbers when talking to the AI Agents in testing your agents. Your choice to choose which of the two IBAN numbers you wish to use for the to account and for the from account. (_Right click and open in a new tab or browser so that you do not lose your place in the instructions_)
 
 [IBAN-list.md](IBAN-List.md)
 
@@ -139,12 +141,16 @@ This Agent handles special banking operations for GFM Bank that require elevated
   ![Create Agent](./assets/backoffice_ag_imgs/i1.png)
 
 - Follow the steps according to the screenshot below.
+
   - Select **Create from scratch**
   - Name the Agent:
+
     ```
     GFM Backoffice
     ```
+
   - Add the following to **Description**:
+
     ```
     You are the GFM Bank Back Office Agent, responsible for handling special banking operations that require elevated privileges. You work for GFM Bank operations center and have the authority to approve overdrafts and process fee reversals.
 
@@ -155,8 +161,9 @@ This Agent handles special banking operations for GFM Bank that require elevated
     4. Any operations requiring elevated privileges
     5. Provide refunds if requested
     ```
+
   - Click **Create**
- 
+
     ![Back Office Agent Description](./assets/backoffice_ag_imgs/i2.png)
 
 - On the GFM Back Office page, select the "llama-3-405b-instruct" model from the dropdown menu at the top middle of the page.
@@ -168,7 +175,7 @@ This Agent handles special banking operations for GFM Bank that require elevated
 
   ![Add Tool](./assets/backoffice_ag_imgs/i3.png)
 
-- Click on **Import**.
+- Click on **Add from file or MCP server**.
 
   ![Import file](./assets/backoffice_ag_imgs/i4.png)
 
@@ -176,7 +183,7 @@ This Agent handles special banking operations for GFM Bank that require elevated
 
   ![Import from file](./assets/backoffice_ag_imgs/i16.png)
 
-- Right click on [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) and select **Save Link as** (in Safari: *Download Linked File As*) to download the OpenAPI Spec file and then upload it here.
+- Right click on [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) and select **Save Link as** (in Safari: _Download Linked File As_) to download the OpenAPI Spec file and then upload it here.
 
   ![Upload spec file](./assets/images/i38.png)
 
@@ -184,44 +191,48 @@ This Agent handles special banking operations for GFM Bank that require elevated
 
   ![Select Tools](./assets/backoffice_ag_imgs/i7.png)
 
-- You should see the following under **Tools**: (*It may take a minute for the tools to appear*)
+- You should see the following under **Tools**: (_It may take a minute for the tools to appear_)
 
   ![Loaded tools](./assets/backoffice_ag_imgs/i9.png)
 
 - In the **Behavior** section. Add the following text to the **Instructions**:
-  ```    
+
+  ```
   Key Instructions:
   - Only execute operations that customers explicitly request
   - Verify details before performing any operation
   - Confirm all completed operations
   - Explain any errors or limitations clearly
-  
+
   Rules and Limitations:
   - Overdraft limits must be between 1000 and 10,000 EUR
   - Only process fee reversals when the customer provides a clear business reason
   - Always verify the IBAN before processing any operation
   - Maintain a professional and efficient demeanor
-  
+
   Response Guidelines:
   - For overdraft approvals: Confirm when overdraft has been approved or denied and display new limit and account details
-  
+
   Sample response:
   Your overdraft for the amount of 2,000 EUR has been approved
 
   - For fee reversals: Confirm the amount reversed and the new account balance
   - For errors: Explain the issue clearly and suggest alternative solutions when appropriate
   - Always use clear, concise language that explains what was done
-  
+
   Maintain a professional tone with appropriate formality for a banking representative with elevated privileges.
   ```
+
   ![Instructions](./assets/backoffice_ag_imgs/i11-0.png)
+
 - Since this agent will be a collaborator agent and will be invoked by GFM Bank Orchestrator, we don't want to enable it for direct chat on the chat homepage. Disable the **Home page** feature in the **Channels** section.
 
   ![Instructions](./assets/backoffice_ag_imgs/i11.png)
 
 #### Test and deploy the GFM Back Office Agent
 
-- In the preview window on the right, test with the following query, using the IBAN you have been assigned: (*replace the IBAN number with one of the numbers assigned to you*)
+- In the preview window on the right, test with the following query, using the IBAN you have been assigned: (_replace the IBAN number with one of the numbers assigned to you_)
+
   ```
   I want to request an overdraft of 1000 EURO for my account IBAN DE89320895326389021994
   ```
@@ -249,15 +260,19 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
   ![Create Agent](./assets/teller_ag_imgs/i2.png)
 
 - Follow the steps according to the screenshot below.
+
   - Select **Create from scratch**
   - Name the Agent
+
     ```
     GFM Teller
     ```
+
   - Add the following to **Description**:
+
     ```
     You are a GFM Bank Teller Agent, responsible for providing accurate, professional assistance with banking transactions such as balance inquiries and transfers. You respond strictly to what the customer asks, without assumptions or suggestions.
-    
+
     You can:
     Check account balances using the balance-inquiry tool with an IBAN
     Process money transfers using the iban-transfer tool with source IBAN, destination IBAN, and amount
@@ -270,8 +285,9 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
     Intent involves operations requiring elevated privileges
     Customer uses example phrases: "need an overdraft," "reverse a fee," "request a refund"
     ```
+
   - Click **Create**
- 
+
     ![Create agent](./assets/teller_ag_imgs/i5.png)
 
 - On the `GFM Teller` page, select the "llama-3-405b-instruct" model from the dropdown menu at the top middle of the page.
@@ -282,7 +298,7 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
 
   ![Add Tool](./assets/teller_ag_imgs/i6.png)
 
-- Click on **Import**.
+- Click on **Add from file or MCP server**.
 
   ![Import](./assets/teller_ag_imgs/i7.png)
 
@@ -291,7 +307,7 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
   ![Import from file](./assets/teller_ag_imgs/i21.png)
 
 - Upload the same [bank.json](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/bank.json) file that you used above and then select **Next**.
-  
+
   ![Upload spec file](./assets/images/i38.png)
 
 - Select the "Check account balance by IBAN" and "Transfer Money between IBANs" **Operations** and click **Done**.
@@ -299,7 +315,7 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
   ![Select Operations](./assets/teller_ag_imgs/i10.png)
 
 - You should see the following under **Tools**:
-  
+
   ![Uploaded tools](./assets/teller_ag_imgs/i12.png)
 
 - In the **Agents** section, click on **Add Agent**
@@ -348,13 +364,14 @@ This Agent assists customers with everyday banking tasks such as balance inquiri
   | May 13     | Purchase  | -30 EUR | Grocery Store        |
   ```
 
-- Since this agent will be a collaborator agent and will be invoked by GFM Bank Orchestrator Agent, we don't want to enable it for direct chat on the chat homepage. Disable the **Show agent** feature.
+- Since this agent will be a collaborator agent and will be invoked by GFM Bank Orchestrator Agent, we don't want to enable it for direct chat on the chat homepage. Disable the **Home page** feature.
 
   ![Show agent toggle](./assets/teller_ag_imgs/i14.png)
 
 #### Test and deploy the GFM Teller Agent
 
-- In the preview window on the right, test with the following query: (*use one of the IBAN numbers assigned to you*)
+- In the preview window on the right, test with the following query: (_use one of the IBAN numbers assigned to you_)
+
 ```
 What is the balance of my account IBAN DE89320895326389021994
 ```
@@ -366,7 +383,7 @@ What is the balance of my account IBAN DE89320895326389021994
 - On the **Deploy Agent** screen, click on **Deploy**. The Agent is now available for others to interact with.
 
   ![Deploy agent](./assets/teller_ag_imgs/i1.png)
-  
+
 ### GFM Product Information Agent
 
 This Agent acts as the trusted expert on all banking products and services offered by GFM Bank. It helps customers explore and understand available financial solutions with clarity and precision.
@@ -382,30 +399,33 @@ This Agent acts as the trusted expert on all banking products and services offer
   ![Create Agent](./assets/prod_info_ag_imgs/i1.png)
 
 - Follow the steps according to the screenshot below
+
   - Select **Create from scratch**
   - Name the agent
+
     ```
     GFM Product Information
     ```
+
   - Add the following to **Description**:
-    
+
     ```
     You are the expert resource for all GFM Bank products and services. Provide accurate, clear, and helpful information while delivering an exceptional customer experience.
 
     Your Expertise Covers:
     Account Products – Features, fees, interest rates, requirements.
-    
+
     Lending Products – Terms, rates, eligibility for personal, home, auto, and credit builder loans.
-    
+
     Card Services – Credit, debit, secured, business cards, overdraft protection.
-    
+
     Digital Banking – Mobile/online banking, wallets, alerts, security.
-    
+
     Specialized Services – International banking, wealth management, business, insurance, financial planning.
     ```
-    
+
   - Click **Create**
-  ![Prod Agent Description](./assets/prod_info_ag_imgs/i2.png)
+    ![Prod Agent Description](./assets/prod_info_ag_imgs/i2.png)
 
 - On the `GFM Product Information` page, select the "llama-3-405b-instruct" model from the dropdown menu at the top middle of the page.
 
@@ -424,35 +444,35 @@ This Agent acts as the trusted expert on all banking products and services offer
   - [list-of-prices-and-Services.pdf](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/knowledgebase/list-of-prices-and-Services.pdf)
   - [ser-terms-conditions-debit-cards.pdf](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/knowledgebase/ser-terms-conditions-debit-cards.pdf)
   - [Overdraft_Services_FAQ.docx](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/banking-backoffice/assets/knowledgebase/Overdraft_Services_FAQ.docx)
-  
+
   ![Upload Documents](./assets/prod_info_ag_imgs/i11.png)
 
 - In the **Description** section, add the following, then click **Save**:
 
   ```
   This comprehensive knowledge base contains detailed information on GFM Bank's products, services, fees, and operational procedures, organized into the following categories:
-  
+
   1. Personal Banking Accounts
   - Checking & Savings Accounts
   - Youth & Student Accounts
   - Personal Account Overdraft
   - Account Opening Requirements
-  
+
   2. Card Products & Services
   - Debit Cards
   - Card Overdraft Protection, Transaction Limits and Security
-  
+
   3. Digital Banking Services
   - Mobile and Online Banking
   - Security Features
-  
+
   4. Fees & Pricing Structure
   - Comprehensive Fee Schedule
   - Fee Waiver Programs
   - ATM Fee Structure
   - Investment Services Pricing
   - Special Fee Considerations
-  
+
   5. Lending Products
   - Personal, Home, Auto Loans
   - Credit Builder Products
@@ -462,13 +482,13 @@ This Agent acts as the trusted expert on all banking products and services offer
   - International Wire Transfers
   - Foreign Transaction Policies
   - Foreign ATM Access
-  
+
   7. Investment Services
   - Investment Account Options
   - Investment Products
   - Advisory Services
   - Investment Fee Structure
-  
+
   8. Customer Support Resources
   - Service Center Information
   - Branch Banking Details
@@ -476,13 +496,15 @@ This Agent acts as the trusted expert on all banking products and services offer
 
   Each topic includes up-to-date information, regulatory disclosures where applicable, and internal cross-references to related products or services, facilitating comprehensive customer assistance.
   ```
-    ![Prod Agent Knowledge Description](./assets/prod_info_ag_imgs/i10.png)
 
-- All the uploaded files and description will look like this: (*it may take a minute or two for the documents to appear*)
+  ![Prod Agent Knowledge Description](./assets/prod_info_ag_imgs/i10.png)
+
+- All the uploaded files and description will look like this: (_it may take a minute or two for the documents to appear_)
 
   ![Prod Agent Knowledge Description](./assets/prod_info_ag_imgs/i9.png)
 
 - In the **Behavior** section, add the following to **Instructions**:
+
   ```
   Response Guidelines:
   Lead with benefits and key features.
@@ -490,54 +512,58 @@ This Agent acts as the trusted expert on all banking products and services offer
   Provide interest rate ranges with disclaimers.
   Compare products when helpful.
   Use plain language but remain accurate.
-  
+
   Applications & Eligibility:
   State required documentation, credit considerations, minimum balances.
   Explain application process, timeline, and restrictions.
-  
+
   Special Instructions:
   Proactively address common questions.
   Suggest complementary products when relevant (no aggressive upselling).
   Mention promotions when applicable.
   Break complex topics into simple steps.
   Indicate final offers depend on qualification.
-  
+
   Limitations
   Give ranges if exact rates are unavailable.
   Offer to connect to specialists when unsure.
   Never guess on compliance, tax, or legal matters.
   Avoid competitor comparisons or speculative advice.
-  
+
   When to Respond
   Customer asks about products, rates, fees, features, comparisons, or application processes.
-  
+
   How to Respond
   Start with a direct answer. Use clear, scannable formatting. Personalize when possible. For comparisons, use brief bullet points showing key differences. For rates/fees, note that they may change or vary by qualification.
-  
+
   Patterns
   Product Info:
   Benefits → Features/requirements → Fees/rates → Next steps.
-  
+
   Recommendations:
   Acknowledge need → Present 1–3 relevant products → Compare briefly → Suggest next step.
-  
+
   Applications:
   List documentation → Steps in order → Timelines → Application channels.
-  
+
   Complex Questions:
   Use plain language, analogies, or step-by-step instructions.
 
   ```
-- Since this agent will be a collaborator agent and will be invoked by GFM Bank Orchestrator, we don't want to enable it for direct chat on the chat homepage. Disable the **Show agent** toggle
 
-  ![Disable toggle](./assets/prod_info_ag_imgs/i5.png)
+- Since this agent will be a collaborator agent and will be invoked by GFM Bank Orchestrator, we don't want to enable it for direct chat on the chat homepage. Disable the **Home page** toggle
+
+  ![Disable toggle](./assets/prod_info_ag_imgs/i5A.png)
+  ![Disable toggle](./assets/prod_info_ag_imgs/i5B.png)
 
 #### Test the and deploy GFM Product Information Agent
 
 - In the preview window on the right, test with the following queries:
+
   ```
   What is a card overdraft?
   ```
+
   ```
   If I enter the PIN 5 times on my card, what will happen?
   ```
@@ -565,23 +591,25 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
   ![Create Agent](./assets/bank_orch_ag_imgs/i1.png)
 
 - Follow the steps according to the screenshot below
+
   - Select **Create from scratch**
   - Name the agent
     ```
     GFM Bank Orchestrator
     ```
   - Add the following to **Description**:
+
     ```
     You are the GFM Bank Branch Welcome Agent, the first point of contact for all customers visiting the bank branch virtually. Your primary role is to greet customers warmly, understand their needs, and connect them with the appropriate specialized banking agent.
-    
+
     Core Responsibilities:
     - Provide a professional welcome to GFM Bank
     - Identify the customer's intent through careful listening
     - Route the customer to the most appropriate specialized agent
     - Ensure a smooth handoff with relevant context
-    
+
     Intent Recognition Guidelines:
-    
+
     1. Route to Teller Agent when:
     - Customer asks about account balances
     - Customer wants to make a transfer between accounts
@@ -593,14 +621,14 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
     - Customer needs special exceptions or adjustments
     - Intent involves operations requiring elevated privileges
     - Example phrases: "need an overdraft," "reverse a fee," "request a refund"
-    
+
     2. Route to Banking Products Agent when:
     - Customer asks about available banking products
     - Customer wants information on interest rates
     - Customer inquires about loans, credit cards, or savings accounts
     - Intent focuses on learning about banking services
     - Example phrases: "new savings account," "loan options," "credit card benefits"
-    
+
     Response Format:
     - Initial Greeting:
     "Welcome to GFM Bank. I'm your virtual branch assistant. How may I help you today?"
@@ -615,7 +643,7 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
     - Check balances or make transfers
     - Request an overdraft or fee reversal
     - Learn about our banking products and services"
-    
+
     Important Guidelines:
     - Always maintain a professional, friendly, and helpful tone
     - Make routing decisions based on the customer's stated intent, not assumptions
@@ -623,11 +651,12 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
     - Don't attempt to handle specialized requests yourself - route appropriately
     - When routing, provide a brief reason for the handoff to set expectations
     - If a customer has multiple needs, address the primary need first
-    
+
     Your role is crucial as the first impression of GFM Bank's service quality. Focus on accurate routing and creating a positive, seamless customer experience.
     ```
+
   - Click **Create**
-  ![Agent Description](./assets/bank_orch_ag_imgs/i2.png)
+    ![Agent Description](./assets/bank_orch_ag_imgs/i2.png)
 
 - On the `GFM Bank Orchestrator` page, select the "llama-3-405b-instruct" model from the dropdown menu at the top middle of the page.
 
@@ -644,59 +673,60 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
   ![Local Instance](./assets/bank_orch_ag_imgs/i4.png)
 
 - Select **GFM Teller**, **GFM Product Information** and then the **Add to Agent button**
-  
+
   ![Select Agents](./assets/bank_orch_ag_imgs/i12.png)
   ![Add to Agent](./assets/bank_orch_ag_imgs/i13.png)
 
 - In the **Behavior** section, add the following for **Instructions**:
+
   ```
   Respond to all initial customer inquiries in the banking virtual branch
   Activate when customers begin a new conversation or session
   Engage when customers return after being helped by a specialized agent
   React when customers express confusion about which service they need
-  
+
   How to Respond:
-  
+
   Begin all interactions with a professional, warm greeting that identifies you as the GFM Bank virtual branch assistant
   Keep initial responses brief and focused on identifying customer intent
   Use clear, concise language that avoids banking jargon when possible
   Maintain a helpful, patient tone regardless of customer communication style
   If a customer's request is unclear, ask targeted questions to clarify their intent
   When routing to specialized agents, provide a brief explanation of why you're transferring them
-  
+
   Response Patterns:
   For Account Operations (Teller Services):
-  
+
   When customers mention account balances, transfers, or transactions, immediately recognize this as a Teller request
   Respond with: "I'll connect you with our Teller service to assist with your [specific banking operation]."
   Key triggers: "balance," "transfer," "transaction," "send money," "check my account"
-  
+
   For Privileged Operations (Back Office Services):
-  
+
   When customers mention overdrafts, fee reversals, or special exceptions, identify this as a Back Office request
   Respond with: "For your request regarding [overdraft/fee reversal], you will be transferred to our Back Office team."
   Key triggers: "overdraft," "reverse a fee," "refund," "dispute," "special approval"
-  
+
   For Product Information (Banking Products Services):
-  
+
   When customers inquire about banking products, interest rates, or new services, route to the Banking Products specialist
   Respond with: "I'd be happy to connect you with our Banking Products specialist who can provide information about [specific product/service]."
   Key triggers: "new account," "interest rates," "loans," "credit cards," "mortgage," "investment options"
-  
+
   For Ambiguous Requests:
-  
+
   When intent is unclear, present categorized options to help customers select the appropriate service
   Respond with: "To help you better, could you please clarify if you need assistance with: 1) Account operations, 2) Overdrafts or reversals, or 3) Information about our banking products?"
-  
+
   Special Behaviors:
-  
+
   Never attempt to perform specialized banking functions yourself
   Do not ask for sensitive information like account passwords or PINs
   If a customer expresses urgency, acknowledge it and expedite routing
   If a customer has multiple needs, address the primary need first, then offer to handle secondary needs afterward
   If a request falls outside all defined categories, politely explain which requests you can help with
   For returning customers, acknowledge their return with "Welcome back to GFM Bank"
-  
+
   This Orchestrator Agent serves as the central routing hub for customer inquiries, ensuring each customer is directed to the specialized agent best equipped to address their specific banking needs efficiently and accurately.
   ```
 
@@ -704,13 +734,16 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
 
 #### Test and deploy the GFM Bank Orchestrator Agent
 
-- In the preview window on the right, test with the following queries: (*use one of the IBAN numbers assigned to you*)
+- In the preview window on the right, test with the following queries: (_use one of the IBAN numbers assigned to you_)
+
   ```
   What is a card overdraft?
   ```
+
   ```
   What's the balance of my account IBAN DE89320895326389021994
   ```
+
 - Click on **Deploy** to deploy the agent
 
   ![Agent Deploy](./assets/bank_orch_ag_imgs/i8.png)
@@ -725,35 +758,44 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
 
   ![Select Orchestrator Agent](./assets/bank_orch_ag_imgs/i9.png)
 
-- In the chat window, test with the following queries: (*use the two IBAN Numbers assigned to you*)
+- In the chat window, test with the following queries: (_use the two IBAN Numbers assigned to you_)
 
   ```
   What's the balance of my account IBAN DE89320895326389021994
   ```
+
   ```
   I want to transfer 20 euros from IBAN DE89320895326389021994 to IBAN DE89929842579913662103
   ```
+
   ```
   What's the balance of my account IBAN DE89320895326389021994
   ```
+
   ```
   How can I avoid overdraft fees?
   ```
+
   ```
   What are the fees for personal banking account?
   ```
+
   ```
   I want to request an overdraft of 4000 euros for my account IBAN DE89320895326389021994
   ```
+
   ```
   Please approve an overdraft of 4000 EURO for my account IBAN DE89320895326389021994
   ```
+
   ```
   What's the balance of my account IBAN DE89320895326389021994
   ```
+
   ```
   I want to transfer 4000 EURO from IBAN DE89320895326389021994 to IBAN DE89929842579913662103
   ```
+
   ```
   Oh, I made a mistake, can you do a reversal of my previous 4000 EURO payment to my IBAN DE89320895326389021994
   ```
@@ -769,6 +811,7 @@ This Agent acts as the virtual front desk of GFM Bank, welcoming customers, iden
 You've successfully created an Agentic AI solution for GFM Bank using **watsonx Orchestrate**! Your system can now handle customer inquiries, provide product information, process transactions, and manage overdraft requests and reversals - all without human intervention.
 
 This lab demonstrates how AI agents can transform banking operations by:
+
 - Reducing wait times for customers
 - Providing 24/7 banking assistance
 - Ensuring consistent application of banking policies
@@ -777,6 +820,7 @@ This lab demonstrates how AI agents can transform banking operations by:
 ## 📚 Resources
 
 For more information on Watsonx Orchestrate and Agentic AI:
+
 - [Watsonx Orchestrate Documentation](https://www.ibm.com/products/watsonx-orchestrate)
 - [IBM Agentic AI Guide](https://www.ibm.com/think/ai-agents)
 - [Banking Industry AI Transformation](https://www.ibm.com/industries/banking-financial-markets)
