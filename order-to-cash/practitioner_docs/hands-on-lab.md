@@ -186,10 +186,10 @@ In this section, you will create the Customer Support Agent, a collaborator agen
 
     - Create a new flow: The **Create a new flow** option provides you with a drag and drop tool builder interface to create a sequence of steps that utilize conditional controls and activities.
 
-    For purposes of the Order-to-Cash Agent, you will use the **Import** option and then **Import from file** to import an OpenAPI specification and select which operations to import as tools.
+    For purposes of the Order-to-Cash Agent, you will use the **Add from file or MCP server** option and then **Import from file** to import an OpenAPI specification and select which operations to import as tools.
 
-    On the tool options pop-up, select **Import** and then selct **Import from file** as illustrated in the figures below.
-    ![wxo tool options](./images/img4.png)
+    On the tool options pop-up, select **Add from file or MCP server** and then selct **Import from file** as illustrated in the figures below.
+    ![wxo tool options](./images/img12-5.png)
     ![wxo tool options](./images/img4.1.png)
 
 26. Right click and select **Save Link As** on [customer_support.yml](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/order-to-cash/practitioner_docs/customer_support.yml) to download and upload it here then click **Next**.
