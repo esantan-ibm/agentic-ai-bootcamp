@@ -1,6 +1,6 @@
-# Transforming Banking with Intelligent Agents - Lab `<!-- omit in toc -->`
+# Transforming Banking with Intelligent Agents - Lab
 
-## Table of contents `<!-- omit in toc -->`
+## Table of contents
 
 - [🔍 Introduction](#introduction)
 - [📊 Banking Operations](#-banking-operations)
