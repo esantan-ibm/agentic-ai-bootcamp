@@ -174,7 +174,7 @@ In this section, you will create the Customer Support Agent, a collaborator agen
     ![llm choose](./images/img2-1.png)
 
 24. On the agent configuration page, scroll down to the **Toolset** section or click the shortcut. Then cick the **Add tool** button to bring up the window for adding tools to the agent.
-    ![wxo agent tools](./images/img3.png)
+    ![wxo agent tools](./images/img3_v2.png)
 
 25. watsonx Orchestrate supports multiple approaches to adding tools to agents:
 
@@ -189,8 +189,8 @@ In this section, you will create the Customer Support Agent, a collaborator agen
     For purposes of the Order-to-Cash Agent, you will use the **Add from file or MCP server** option and then **Import from file** to import an OpenAPI specification and select which operations to import as tools.
 
     On the tool options pop-up, select **Add from file or MCP server** and then selct **Import from file** as illustrated in the figures below.
-    ![wxo tool options](./images/img12-5.png)
-    ![wxo tool options](./images/img4.1.png)
+    ![wxo tool options](./images/img12-5_v2.png)
+    ![wxo tool options](./images/img4.1_v2.png)
 
 26. Right click and select **Save Link As** on [customer_support.yml](https://raw.githubusercontent.com/esantan-ibm/agentic-ai-bootcamp/refs/heads/main/order-to-cash/practitioner_docs/customer_support.yml) to download and upload it here then click **Next**.
     ![wxo tool import openapi](./images/img2.png)
@@ -199,7 +199,7 @@ In this section, you will create the Customer Support Agent, a collaborator agen
     ![wxo tool import operations](./images/img5.png)
 
 28. At this point, you will see the three tools imported under the Tools subsection which means they are available for the **Customer Support Agent** to use these tools in executing tasks. _Note: it may take a minute for the tools to appear._
-    ![wxo tool import operations](./images/img5-1.png)
+    ![wxo tool import operations](./images/img5-1_v2.png)
 
 29. Next, scroll further down to the **Behavior** section or click the **Behavior** shortcut and add the following Instructions to guide the agent in its reasoning and orchestration.
 
@@ -281,7 +281,7 @@ In this section, you will create the Customer Support Agent, a collaborator agen
     * Follows a real-world support workflow
     ````
 
-    ![wxo customer support agent behavior](./images/img6.png)
+    ![wxo customer support agent behavior](./images/img6_v2.png)
 
 30. Now that you have completed the creation of the agent and added the tools it requires, test the tools in the Preview section by asking a sample question such as:
 
@@ -432,7 +432,7 @@ In this section, you will build the **Order Management Agent**, a key collaborat
 
 45. At this point, you are ready to deploy this Agent as a collaboration agent. To do so, scroll down to Channels at the bottom of the configuration page and make sure the slide bar next to Home page is disabled. Next, click the **Deploy** button to deploy.
 
-    ![wxo order managemen agent deploy](./images/img19-0.png)
+    ![wxo order managemen agent deploy](./images/img19-0_v2.png)
 
     An press **Deploy** again
     ![deploy again](./images/img19-1.png)
@@ -456,7 +456,7 @@ Now that you have developed all agents and tools, in this section, you will work
     ![add agent](./images/img22-0.png)
 
 50. On the pop-up, select **Add from local instance** tile. For reference, watsonx Orchestrate supports multiple approaches for adding collaborator agents.
-    ![wxo collaborator agents](./images/img22.png)
+    ![wxo collaborator agents](./images/img22_v2.png)
 
 51. Select the checkbox next to both, the **Customer Support** and the **Order Management Agent** and click **Add to agent** button.
     ![wxo financial analyst add collaborators](./images/img23.png)
