@@ -522,7 +522,7 @@ Now that you have developed all agents and tools, in this section, you will work
     ![order management](./images/img25-0.png)
 
 54. At this point, you are ready to deploy your **Order-to-Cash Agent**. To do so, scroll to the bottom of the configuration page and make sure the slide bar next to **Show agent** is enabled (green) to make the **Order-to-Cash Agent** accessible on the chat interface. Click **Deploy** button to deploy your agent. Then click deploy again on the popup window.
-    ![wxo  agent deploy](./images/img24.png)
+    ![wxo  agent deploy](./images/img24_v2.png)
     ![wxo  agent deploy](./images/img24-1.png)
 
 _Congratulations!!_ You have just developed and deployed the **Order-to-Cash Agent**.
