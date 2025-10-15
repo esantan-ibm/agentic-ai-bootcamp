@@ -451,50 +451,14 @@ This Agent acts as the trusted expert on all banking products and services offer
 
   ```
   This comprehensive knowledge base contains detailed information on GFM Bank's products, services, fees, and operational procedures, organized into the following categories:
-
   1. Personal Banking Accounts
-  - Checking & Savings Accounts
-  - Youth & Student Accounts
-  - Personal Account Overdraft
-  - Account Opening Requirements
-
   2. Card Products & Services
-  - Debit Cards
-  - Card Overdraft Protection, Transaction Limits and Security
-
   3. Digital Banking Services
-  - Mobile and Online Banking
-  - Security Features
-
   4. Fees & Pricing Structure
-  - Comprehensive Fee Schedule
-  - Fee Waiver Programs
-  - ATM Fee Structure
-  - Investment Services Pricing
-  - Special Fee Considerations
-
   5. Lending Products
-  - Personal, Home, Auto Loans
-  - Credit Builder Products
-
   6. International Banking
-  - Foreign Currency Services
-  - International Wire Transfers
-  - Foreign Transaction Policies
-  - Foreign ATM Access
-
   7. Investment Services
-  - Investment Account Options
-  - Investment Products
-  - Advisory Services
-  - Investment Fee Structure
-
   8. Customer Support Resources
-  - Service Center Information
-  - Branch Banking Details
-  - Appointment Scheduling
-
-  Each topic includes up-to-date information, regulatory disclosures where applicable, and internal cross-references to related products or services, facilitating comprehensive customer assistance.
   ```
 
   ![Prod Agent Knowledge Description](./assets/prod_info_ag_imgs/i10.png)
